@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hold up, let me grab my portfolio...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 2px;
+            animation: loading 3s linear forwards;
+        }
+        
+        .countdown {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            animation: pulse 1s infinite;
+        }
+        
+        .links {
+            margin-top: 2rem;
+        }
+        
+        .link {
+            display: inline-block;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        @keyframes loading {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Hold up!</h1>
+        <p class="subtitle">I'm still building my portfolio site...</p>
+        <p>But hey, while you're here, check out my work!</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        
+        <div class="countdown" id="countdown">3</div>
+        
+        <div class="links">
+            <a href="https://github.com/yourusername" class="link" target="_blank">🐙 GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile" class="link" target="_blank">💼 LinkedIn</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Portfolio coming soon... probably 🤷‍♂️
+    </div>
+
+    <script>
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            count--;
+            countdownEl.textContent = count;
+            
+            if (count <= 0) {
+                clearInterval(timer);
+                countdownEl.textContent = "Let's go!";
+                
+                // Redirect after 4 seconds total (3 second countdown + 1 second "Let's go!")
+                setTimeout(() => {
+                    // Change this URL to your preferred destination
+                    window.location.href = 'https://github.com/yourusername';
+                }, 1000);
+            }
+        }, 1000);
+        
+        // Backup redirect in case JavaScript fails
+        setTimeout(() => {
+            window.location.href = 'https://github.com/yourusername';
+        }, 5000);
+    </script>
+    
+    <!-- Fallback meta redirect if JavaScript is disabled -->
+    <noscript>
+        <meta http-equiv="refresh" content="2; url=https://github.com/yourusername">
+    </noscript>
+</body>
+</html>
