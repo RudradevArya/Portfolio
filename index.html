@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hold up, let me grab my portfolio...</title>
+    <title>~/portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #FFFDF0;
+            --bg-secondary: #F8F6E8;
+            --text: #2D2D2A;
+            --accent: #4A4A47;
+            --green: #0F7B0F;
+            --blue: #0066CC;
+            --gray: #666;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,159 +25,256 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: var(--bg);
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: var(--text);
             min-height: 100vh;
-            color: white;
-        }
-        
-        .container {
-            text-align: center;
             padding: 2rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
         }
         
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        
-        .progress-bar {
-            width: 300px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
-            margin: 2rem auto;
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid #E8E6D8;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             overflow: hidden;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
-            border-radius: 2px;
-            animation: loading 3s linear forwards;
+        .terminal-header {
+            background: #E8E6D8;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #D8D6C8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .countdown {
-            font-size: 3rem;
+        .terminal-buttons {
+            display: flex;
+            gap: 0.3rem;
+        }
+        
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+        }
+        
+        .btn-close { background: #ff5f57; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #28ca42; }
+        
+        .terminal-title {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-left: 1rem;
+        }
+        
+        .terminal-body {
+            padding: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+        }
+        
+        .name {
+            font-family: 'Russo One', monospace;
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .prompt {
+            color: var(--green);
+            margin-right: 0.5rem;
+        }
+        
+        .command {
+            color: var(--blue);
+        }
+        
+        .output {
+            margin: 0.5rem 0 1rem 0;
+            padding-left: 1rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
             font-weight: bold;
-            margin: 1rem 0;
-            animation: pulse 1s infinite;
-        }
-        
-        .links {
-            margin-top: 2rem;
         }
         
         .link {
-            display: inline-block;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            color: var(--blue);
             text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
         }
         
         .link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--blue);
+            background: rgba(0, 102, 204, 0.05);
+            padding: 0.1rem 0.3rem;
+            margin: -0.1rem -0.3rem;
+            border-radius: 3px;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        .item {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
         }
         
-        @keyframes loading {
-            0% { width: 0; }
-            100% { width: 100%; }
+        .coming-soon {
+            color: var(--gray);
+            font-style: italic;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .cursor {
+            animation: blink 1s infinite;
+            background: var(--text);
+            width: 0.6rem;
+            height: 1.2rem;
+            display: inline-block;
+            margin-left: 0.2rem;
         }
         
-        .footer {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.7;
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .ascii-art {
+            color: var(--gray);
+            font-size: 0.8rem;
+            line-height: 1.2;
+            margin: 1rem 0;
+        }
+        
+        .status-bar {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E8E6D8;
+            color: var(--gray);
             font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .name {
+                font-size: 1.5rem;
+            }
+            
+            .terminal-body {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 Hold up!</h1>
-        <p class="subtitle">I'm still building my portfolio site...</p>
-        <p>But hey, while you're here, check out my work!</p>
-        
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <button class="btn btn-close"></button>
+                <button class="btn btn-minimize"></button>
+                <button class="btn btn-maximize"></button>
+            </div>
+            <div class="terminal-title">user@portfolio: ~</div>
         </div>
         
-        <div class="countdown" id="countdown">3</div>
-        
-        <div class="links">
-            <a href="https://github.com/yourusername" class="link" target="_blank">🐙 GitHub</a>
-            <a href="https://linkedin.com/in/yourprofile" class="link" target="_blank">💼 LinkedIn</a>
+        <div class="terminal-body">
+            <div class="header">
+                <div class="name">Your Name</div>
+                <div class="tagline">Developer • Creator • Problem Solver</div>
+                <div class="ascii-art">
+    ┌─────────────────────────────────────┐
+    │  Welcome to my digital workspace    │
+    └─────────────────────────────────────┘
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">ls -la socials/</span></div>
+                <div class="output">
+                    <div class="item">→ <a href="https://github.com/yourusername" class="link" target="_blank">github.com/yourusername</a></div>
+                    <div class="item">→ <a href="https://linkedin.com/in/yourprofile" class="link" target="_blank">linkedin.com/in/yourprofile</a></div>
+                    <div class="item">→ <a href="https://twitter.com/yourusername" class="link" target="_blank">twitter.com/yourusername</a></div>
+                    <div class="item">→ <a href="mailto:your.email@example.com" class="link">your.email@example.com</a></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">cat resume.pdf</span></div>
+                <div class="output">
+                    <div class="item">→ <a href="/path/to/your/resume.pdf" class="link" target="_blank">Download Resume</a></div>
+                    <div class="item">→ <a href="/path/to/your/cv.pdf" class="link" target="_blank">View CV Online</a></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">ls projects/</span></div>
+                <div class="output">
+                    <div class="item">→ <a href="https://github.com/yourusername/project1" class="link" target="_blank">awesome-project/</a></div>
+                    <div class="item">→ <a href="https://github.com/yourusername/project2" class="link" target="_blank">another-cool-thing/</a></div>
+                    <div class="item">→ <span class="coming-soon">more-projects/ (coming soon...)</span></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">cat blog/</span></div>
+                <div class="output">
+                    <div class="item">→ <a href="https://yourusername.bearblog.dev" class="link" target="_blank">Personal Blog</a> <span class="coming-soon">(coming soon...)</span></div>
+                    <div class="item">→ <span class="coming-soon">Tech thoughts & tutorials</span></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">whoami</span></div>
+                <div class="output">
+                    <div class="item">A developer who enjoys building things that matter.</div>
+                    <div class="item">Currently working with: React, Node.js, Python, AWS</div>
+                    <div class="item">Always learning something new.</div>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <div><span class="prompt">$</span><span class="command">_</span><span class="cursor"></span></div>
+                <div style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Last updated: <span id="lastUpdated"></span> • Built with ❤️ and caffeine
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div class="footer">
-        Portfolio coming soon... probably 🤷‍♂️
     </div>
 
     <script>
-        let count = 3;
-        const countdownEl = document.getElementById('countdown');
+        // Set current date
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
         
-        const timer = setInterval(() => {
-            count--;
-            countdownEl.textContent = count;
-            
-            if (count <= 0) {
-                clearInterval(timer);
-                countdownEl.textContent = "Let's go!";
-                
-                // Redirect after 4 seconds total (3 second countdown + 1 second "Let's go!")
-                setTimeout(() => {
-                    // Change this URL to your preferred destination
-                    window.location.href = 'https://github.com/yourusername';
-                }, 1000);
+        // Add some terminal-like interactivity
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'c') {
+                console.log('Process interrupted by user');
             }
-        }, 1000);
-        
-        // Backup redirect in case JavaScript fails
-        setTimeout(() => {
-            window.location.href = 'https://github.com/yourusername';
-        }, 5000);
+        });
     </script>
-    
-    <!-- Fallback meta redirect if JavaScript is disabled -->
-    <noscript>
-        <meta http-equiv="refresh" content="2; url=https://github.com/yourusername">
-    </noscript>
 </body>
 </html>
