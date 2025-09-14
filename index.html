@@ -236,13 +236,13 @@
         
         .link::after {
             content: " ↗";
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             opacity: 0.6;
             margin-left: 0.2rem;
         }
         
         .link[href^="mailto"]::after {
-            content: " ✉";
+            content: " @";
         }
         
         .link:hover {
@@ -353,20 +353,24 @@
         .marquee {
             overflow: hidden;
             white-space: nowrap;
-            background: var(--green);
-            color: var(--bg);
-            padding: 0.2rem 0;
+            background: var(--bg-secondary);
+            color: var(--green);
+            padding: 0.3rem 0.8rem;
             margin: 0.5rem 0;
-            border-radius: 3px;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--green);
+            font-family: inherit;
         }
         
         .marquee-content {
             display: inline-block;
             animation: marquee 40s linear infinite;
+            animation-delay: 0.5s;
+            animation-fill-mode: both;
         }
         
         @keyframes marquee {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(20%); }
             100% { transform: translateX(-100%); }
         }
         
@@ -471,7 +475,7 @@
                 </div>
                 <div class="marquee">
                     <div class="marquee-content">
-                        Available for opportunities | 400+ problems solved | AWS Certified | Competition Winner | Full-stack Developer | Cloud Computing Enthusiast
+                        [STATUS] Available for opportunities | [STATS] Top 30/2000+ on GeeksForGeeks leaderboard | [STATS] 400+ problems solved | [CERT] AWS Certified | [ACHIEVEMENT] Competition Winner | [ROLE] Full-stack Developer | [FOCUS] Cloud Computing Enthusiast
                     </div>
                 </div>
             </div>
@@ -479,9 +483,9 @@
             <div class="section">
                 <div><span class="prompt">$</span><span class="command">cat contact.txt</span></div>
                 <div class="output">
-                    <div class="item">→ <a href="mailto:rudradev93@gmail.com" class="link">rudradev93@gmail.com</a></div>
-                    <div class="item">→ <a href="https://github.com/RudradevArya" class="link" target="_blank">github.com/RudradevArya</a></div>
-                    <div class="item">→ <a href="https://linkedin.com/in/rudradev-arya" class="link" target="_blank">linkedin.com/in/rudradev-arya</a></div>
+                    <div class="item">├─ <a href="mailto:rudradev93@gmail.com" class="link">rudradev93@gmail.com</a></div>
+                    <div class="item">├─ <a href="https://github.com/RudradevArya" class="link" target="_blank">github.com/RudradevArya</a></div>
+                    <div class="item">└─ <a href="https://linkedin.com/in/rudradev-arya" class="link" target="_blank">linkedin.com/in/rudradev-arya</a></div>
                     <!-- <div class="item">→ <span class="highlight">+91-8390712030</span></div> -->
                 </div>
             </div>
@@ -489,7 +493,7 @@
             <div class="section">
                 <div><span class="prompt">$</span><span class="command">cat resume.pdf</span></div>
                 <div class="output">
-                    <div class="item">→ <a href="https://drive.google.com/file/d/1G38ddDamPIeXKVn8qj0UknGX01p81VAT/view?usp=drive_link" class="link" target="_blank">resume.pdf</a> <span class="highlight">[View/Download]</span></div>
+                    <div class="item">└─ <a href="https://drive.google.com/file/d/1G38ddDamPIeXKVn8qj0UknGX01p81VAT/view?usp=drive_link" class="link" target="_blank">resume.pdf</a> <span class="highlight">[View/Download]</span></div>
                 </div>
             </div>
             
@@ -497,23 +501,23 @@
                 <div><span class="prompt">$</span><span class="command">ls -la projects/</span></div>
                 <div class="output">
                     <div class="project-item">
-                        <div class="project-title">→ <a href="https://github.com/RudradevArya/Lambda-Mailer-Backend" class="link" target="_blank">LambdaMailer</a></div>
-                        <div class="project-tech">Node.js • AWS Lambda • SES • Beanstalk • React</div>
+                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/Lambda-Mailer-Backend" class="link" target="_blank">LambdaMailer</a></div>
+                        <div class="project-tech">Node.js | AWS Lambda | SES | Beanstalk | React</div>
                         <div class="project-desc">Scalable email service: <span class="highlight">99.2%</span> success rate for 50k emails at <span class="highlight">200 mails/sec</span> throughput</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">→ <a href="https://github.com/RudradevArya/EventU" class="link" target="_blank">EventU</a></div>
-                        <div class="project-tech">Next.js • Appwrite • TypeScript • NoSQL • TailwindCSS</div>
+                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/EventU" class="link" target="_blank">EventU</a></div>
+                        <div class="project-tech">Next.js | Appwrite | TypeScript | NoSQL | TailwindCSS</div>
                         <div class="project-desc">Event management system with <span class="highlight">40%</span> reduction in data retrieval time</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">→ <a href="https://github.com/RudradevArya/Python-Minecraft" class="link" target="_blank">Minecraft Replica</a></div>
-                        <div class="project-tech">Python • Pyglet • CUDA • Linear Algebra • OOP</div>
-                        <div class="project-desc">128x128 block game with CUDA optimization: <span class="highlight">50 → 270+ FPS</span></div>
+                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/Python-Minecraft" class="link" target="_blank">Minecraft Replica</a></div>
+                        <div class="project-tech">Python | Pyglet | CUDA | Linear Algebra | OOP</div>
+                        <div class="project-desc">128x128 block game with CUDA optimization: <span class="highlight">50 -> 270+ FPS</span></div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">→ <a href="https://github.com/RudradevArya/Elevator-Simulation-nd-Estimation" class="link" target="_blank">Elevator Simulation System</a></div>
-                        <div class="project-tech">Java • Arduino • C++ • Algorithm Design • PoC</div>
+                        <div class="project-title">└─ <a href="https://github.com/RudradevArya/Elevator-Simulation-nd-Estimation" class="link" target="_blank">Elevator Simulation System</a></div>
+                        <div class="project-tech">Java | Arduino | C++ | Algorithm Design | PoC</div>
                         <div class="project-desc">Real-world scheduling algorithms (Round Robin, Up Peak, Zoning) with Arduino PoC</div>
                     </div>
                 </div>
@@ -525,19 +529,19 @@
                     <div class="compact-grid">
                         <div>
                             <div class="highlight">Languages:</div>
-                            <div>Python, C/C++, JavaScript, TypeScript, CUDA</div>
+                            <div>Python | C/C++ | JavaScript | TypeScript | CUDA</div>
                         </div>
                         <div>
                             <div class="highlight">Cloud & AWS:</div>
-                            <div>Lambda, SES, S3, RDS, Beanstalk, GCP</div>
+                            <div>Lambda | SES | S3 | RDS | Beanstalk | GCP</div>
                         </div>
                         <div>
                             <div class="highlight">Frameworks:</div>
-                            <div>React, Next.js, Node.js, Express.js</div>
+                            <div>React | Next.js | Node.js | Express.js</div>
                         </div>
                         <div>
                             <div class="highlight">Databases:</div>
-                            <div>MongoDB, Firebase, Redis, NoSQL</div>
+                            <div>MongoDB | Firebase | Redis | NoSQL</div>
                         </div>
                     </div>
                 </div>
@@ -546,26 +550,26 @@
             <div class="section">
                 <div><span class="prompt">$</span><span class="command">cat certifications.txt</span></div>
                 <div class="output">
-                    <div class="item">→ <a href="https://courses.nvidia.com/certificates/f4562fbcfdb54cc086b362b4a8e33f64/" class="link" target="_blank">NVIDIA: CUDA C/C++ Fundamentals</a></div>
-                    <div class="item">→ <a href="https://www.credly.com/go/lq267fnl" class="link" target="_blank">AWS Academy: Cloud Architecting</a></div>
-                    <div class="item">→ AWS Cloud Quest: Cloud Practitioner</div>
+                    <div class="item">├─ <a href="https://courses.nvidia.com/certificates/f4562fbcfdb54cc086b362b4a8e33f64/" class="link" target="_blank">NVIDIA: CUDA C/C++ Fundamentals</a></div>
+                    <div class="item">├─ <a href="https://www.credly.com/go/lq267fnl" class="link" target="_blank">AWS Academy: Cloud Architecting</a></div>
+                    <div class="item">└─ AWS Cloud Quest: Cloud Practitioner</div>
                 </div>
             </div>
             
             <div class="section">
                 <div><span class="prompt">$</span><span class="command">cat achievements.txt</span></div>
                 <div class="output">
-                    <div class="item">→ <span class="highlight">400+</span> problems solved across coding platforms</div>
-                    <div class="item">→ Winner of ValiCQ (university-level coding competition)</div>
-                    <div class="item">→ Top 30/2000+ on GeeksForGeeks leaderboard</div>
-                    <div class="item">→ Participated in NVIDIA DLI GPU Computing Codeathon</div>
+                    <div class="item">├─ <span class="highlight">400+</span> problems solved across coding platforms</div>
+                    <div class="item">├─ Winner of ValiCQ (university-level coding competition)</div>
+                    <div class="item">├─ Top 30/2000+ on GeeksForGeeks leaderboard</div>
+                    <div class="item">└─ Participated in NVIDIA DLI GPU Computing Codeathon</div>
                 </div>
             </div>
             
             <div class="section">
                 <div><span class="prompt">$</span><span class="command">ls -la blog/</span></div>
                 <div class="output">
-                    <div class="item">→ <a href="https://rudradev.bearblog.dev" class="link" target="_blank">rudradev.bearblog.dev</a> <span class="coming-soon">(coming soon)</span></div>
+                    <div class="item">└─ <a href="https://rudradev.bearblog.dev" class="link" target="_blank">rudradev.bearblog.dev</a> <span class="coming-soon">(coming soon)</span></div>
                 </div>
             </div>
             
