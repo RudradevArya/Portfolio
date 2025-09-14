@@ -18,6 +18,25 @@
             --blue: #0066CC;
             --gray: #666;
             --orange: #FF6B35;
+            --border: #E8E6D8;
+            --border-secondary: #D8D6C8;
+            --terminal-header: #E8E6D8;
+            --ascii-bg: rgba(12, 5, 5, 0.05);
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0C0C0C;
+            --bg-secondary: #1A1A1A;
+            --text: #CCCCCC;
+            --accent: #B0B0B0;
+            --green: #4CAF50;
+            --blue: #64B5F6;
+            --gray: #888;
+            --orange: #FF8A65;
+            --border: #333;
+            --border-secondary: #444;
+            --terminal-header: #2A2A2A;
+            --ascii-bg: rgba(255, 255, 255, 0.05);
         }
         
         * {
@@ -34,6 +53,7 @@
             min-height: 100vh;
             padding: 1.5rem;
             line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .terminal {
@@ -41,19 +61,27 @@
             margin: 0 auto;
             background: var(--bg-secondary);
             border-radius: 6px;
-            border: 1px solid #E8E6D8;
+            border: 1px solid var(--border);
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
         
         .terminal-header {
-            background: #E8E6D8;
+            background: var(--terminal-header);
             padding: 0.4rem 1rem;
-            border-bottom: 1px solid #D8D6C8;
+            border-bottom: 1px solid var(--border-secondary);
             display: flex;
             align-items: center;
             gap: 0.5rem;
             user-select: none;
+            justify-content: space-between;
+        }
+        
+        .terminal-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .terminal-buttons {
@@ -164,6 +192,49 @@
             white-space: pre;
             overflow: hidden;
             text-align: left;
+        }
+        
+        .kuru-dynasty-art {
+            font-size: 0.15rem;
+            line-height: 1;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            white-space: pre;
+            overflow: hidden;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: var(--ascii-bg);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        .kuru-dynasty-art pre {
+            margin: 0;
+            padding: 0;
+            white-space: pre;
+            overflow: auto;
+            text-align: center;
+            max-width: 100%;
+        }
+        
+        /* Dark mode adjustments for ASCII art colors */
+        [data-theme="dark"] .kuru-dynasty-art span[style*="color: #870000"] {
+            color: #ff6b6b !important;
+        }
+        
+        [data-theme="dark"] .kuru-dynasty-art span[style*="color: #262626"] {
+            color: #888 !important;
+        }
+        
+        [data-theme="dark"] .kuru-dynasty-art span[style*="color: #1C1C1C"] {
+            color: #aaa !important;
+        }
+        
+        [data-theme="dark"] .kuru-dynasty-art span[style*="color: #5F0000"] {
+            color: #ff8a80 !important;
+        }
+        
+        [data-theme="dark"] .kuru-dynasty-art span[style*="color: #AF0000"] {
+            color: #ff5252 !important;
         }
         
         .tagline {
@@ -285,9 +356,33 @@
         .status-bar {
             margin-top: 1.5rem;
             padding-top: 0.8rem;
-            border-top: 1px solid #E8E6D8;
+            border-top: 1px solid var(--border);
             color: var(--gray);
             font-size: 0.8rem;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--bg);
+            border-color: var(--accent);
+        }
+        
+        .theme-icon {
+            font-size: 0.9rem;
         }
         
         .marquee {
@@ -354,18 +449,35 @@
                 min-width: auto;
                 padding: 0.3rem;
             }
+            
+            .kuru-dynasty-art {
+                font-size: 0.08rem;
+                padding: 0.3rem;
+                margin: 0.3rem 0;
+            }
+            
+            .kuru-dynasty-art pre {
+                overflow-x: auto;
+                font-size: 0.08rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="terminal">
         <div class="terminal-header">
-            <div class="terminal-buttons">
-                <button class="btn btn-close" onclick="closeTerminal()" title="Close terminal"></button>
-                <button class="btn btn-minimize" onclick="minimizeTerminal()" title="Minimize terminal"></button>
-                <button class="btn btn-maximize" onclick="maximizeTerminal()" title="Maximize terminal"></button>
+            <div class="terminal-left">
+                <div class="terminal-buttons">
+                    <button class="btn btn-close" onclick="closeTerminal()" title="Close terminal"></button>
+                    <button class="btn btn-minimize" onclick="minimizeTerminal()" title="Minimize terminal"></button>
+                    <button class="btn btn-maximize" onclick="maximizeTerminal()" title="Maximize terminal"></button>
+                </div>
+                <div class="terminal-title">rudradev@portfolio: ~</div>
             </div>
-            <div class="terminal-title">rudradev@portfolio: ~</div>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+                <span class="theme-icon">🌙</span>
+                <span class="theme-text">Dark</span>
+            </button>
         </div>
         
         <div class="terminal-body">
@@ -524,6 +636,73 @@
                 </div>
             </div>
             
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">cat ascii_art/kuru_dynasty.txt</span></div>
+                <div class="output">
+                    <div class="kuru-dynasty-art">
+                        <pre><span style="color: #0c0000;">
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@s2@B+===fCE"]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P<' </span><span style="color: #262626;">,</span><span style="color: #1C1C1C;">ggggggggg;  </span><span style="color: #5F0000;">.</span><span style="color: #870000;">+P@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P></span><span style="color: #262626;">. </span><span style="color: #1C1C1C;">7@@@@@@@@@@@@@@@@</span><span style="color: #262626;">. </span><span style="color: #870000;">'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B@"   </span><span style="color: #1C1C1C;">@@@BBBBBBBBBBBB@@@@B</span><span style="color: #262626;">.. </span><span style="color: #870000;">[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@ </span><span style="color: #1C1C1C;">__@@@"? </span><span style="color: #870000;">___G_@[2g_</span><span style="color: #5F0000;">.</span><span style="color: #1C1C1C;">"""@@@C</span><span style="color: #262626;">" </span><span style="color: #5F0000;">.</span><span style="color: #870000;">B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@h </span><span style="color: #1C1C1C;">._@@@</span><span style="color: #262626;">,  </span><span style="color: #870000;">yQ@@E@@E42@@mQ,</span><span style="color: #262626;">'_</span><span style="color: #1C1C1C;">l@@@__ </span><span style="color: #870000;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/</span><span style="color: #262626;">!</span><span style="color: #1C1C1C;">|@@| </span><span style="color: #5F0000;">.</span><span style="color: #870000;">;@g@RP  </span><span style="color: #1C1C1C;">g_  </span><span style="color: #870000;">.@@@@@  </span><span style="color: #1C1C1C;">@@@@@ </span><span style="color: #870000;">|@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/ </span><span style="color: #1C1C1C;">@@@@| </span><span style="color: #870000;">@@@@@q </span><span style="color: #1C1C1C;">!@@@@</span><span style="color: #262626;">, </span><span style="color: #870000;">@@@@@M  </span><span style="color: #262626;">,</span><span style="color: #1C1C1C;">@@@  </span><span style="color: #870000;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/  </span><span style="color: #1C1C1C;">@@@</span><span style="color: #262626;">.</span><span style="color: #5F0000;">,</span><span style="color: #870000;">A@@@@@P</span><span style="color: #262626;">`</span><span style="color: #1C1C1C;">!B@BB </span><span style="color: #5F0000;">,</span><span style="color: #870000;">@@@@@@@* </span><span style="color: #262626;">`</span><span style="color: #870000;">___@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #1C1C1C;">@@@@g</span><span style="color: #262626;">'</span><span style="color: #870000;">'"+BBE%S__</span><span style="color: #1C1C1C;">"</span><span style="color: #870000;">_ _g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><span style="color: #1C1C1C;">.@@@@@$______________</span><span style="color: #262626;">, </span><span style="color: #5F0000;">-</span><span style="color: #870000;">""<="8WP*@4@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g </span><span style="color: #1C1C1C;">@@@@@@@@@@@@@@@@@@@@ggggggggggggggggg_</span><span style="color: #262626;">=  </span><span style="color: #870000;">^~S@E@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@b </span><span style="color: #1C1C1C;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ </span><span style="color: #870000;">`f@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@M\  </span><span style="color: #1C1C1C;">@@@@@@BBB@BBBBB@BBB@BBBBBBBBBBB@@@@@@@@@@@@g </span><span style="color: #5F0000;">` </span><span style="color: #870000;">W@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><span style="color: #5F0000;">`</span><span style="color: #262626;">;</span><span style="color: #1C1C1C;">@@@@@@</span><span style="color: #262626;">,</span><span style="color: #5F0000;">.</span><span style="color: #870000;">9@@_BZ@@Ggwggs~____</span><span style="color: #5F0000;">-</span><span style="color: #870000;">,_</span><span style="color: #1C1C1C;">'"@@@@@@P"""T@@1_ </span><span style="color: #5F0000;">.</span><span style="color: #870000;">%0@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@E  </span><span style="color: #1C1C1C;">T@@@@_.</span><span style="color: #870000;">T]@@@B@$r*""=D@@@@@@m*</span><span style="color: #1C1C1C;">._&@@@@@] </span><span style="color: #AF0000;">. </span><span style="color: #1C1C1C;">' @@@L_</span><span style="color: #262626;">.</span><span style="color: #870000;">[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@WB</span><span style="color: #5F0000;">\</span><span style="color: #1C1C1C;">|@@@@@g  </span><span style="color: #870000;">@@@D </span><span style="color: #1C1C1C;">gggggg;</span><span style="color: #262626;">.</span><span style="color: #870000;"><@@@J9 </span><span style="color: #1C1C1C;">|@@@@@@</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">`</span><span style="color: #870000;">ngi</span><span style="color: #5F0000;">. </span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">@@@</span><span style="color: #262626;">'</span><span style="color: #5F0000;">'</span><span style="color: #870000;">?@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@F </span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">@@@@@@j</span><span style="color: #870000;">'@w  </span><span style="color: #1C1C1C;">@@@@@@@@ </span><span style="color: #870000;">v0@` </span><span style="color: #1C1C1C;">@@@@@@M` </span><span style="color: #870000;">'@@@@@</span><span style="color: #5F0000;">`</span><span style="color: #1C1C1C;">.@@@@j</span><span style="color: #5F0000;">`</span><span style="color: #870000;">[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B@@@@@@@W </span><span style="color: #1C1C1C;">BB@@@@] </span><span style="color: #870000;">\[</span><span style="color: #1C1C1C;">!B@@@@@@@@</span><span style="color: #262626;">,</span><span style="color: #870000;">!&' </span><span style="color: #262626;">^</span><span style="color: #1C1C1C;">@@@@BB </span><span style="color: #5F0000;">/</span><span style="color: #870000;">$@@@@@@[,</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">'@@] </span><span style="color: #870000;">\@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MP </span><span style="color: #262626;">:</span><span style="color: #1C1C1C;">_</span><span style="color: #262626;">,</span><span style="color: #870000;">"@@@@@@W. </span><span style="color: #1C1C1C;">@@@@[_ </span><span style="color: #870000;">T</span><span style="color: #5F0000;">' </span><span style="color: #1C1C1C;">""@@@@T.</span><span style="color: #5F0000;">/</span><span style="color: #870000;">'  </span><span style="color: #1C1C1C;">@@@@@@| </span><span style="color: #870000;">;g@@@<M@@@A</span><span style="color: #5F0000;">. </span><span style="color: #1C1C1C;">@@]_</span><span style="color: #5F0000;">'</span><span style="color: #870000;">'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@M</span><span style="color: #5F0000;">. </span><span style="color: #1C1C1C;">]_@  </span><span style="color: #870000;">[@@@@@@R,</span><span style="color: #1C1C1C;">`'@@@@  </span><span style="color: #870000;">|\, </span><span style="color: #262626;">._</span><span style="color: #1C1C1C;">" ` </span><span style="color: #870000;">:  </span><span style="color: #262626;">^</span><span style="color: #1C1C1C;">l@@@@@ </span><span style="color: #5F0000;">.</span><span style="color: #870000;">/DP  </span><span style="color: #1C1C1C;">_  </span><span style="color: #870000;">#B@@!</span><span style="color: #1C1C1C;">'@@@@</span><span style="color: #262626;">.</span><span style="color: #870000;">M[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@E</span><span style="color: #5F0000;">,</span><span style="color: #1C1C1C;">:g@@@ </span><span style="color: #5F0000;">,</span><span style="color: #870000;">@@@@@@@@@</span><span style="color: #5F0000;">. </span><span style="color: #1C1C1C;">@@@@gg  </span><span style="color: #870000;">@@@@@@E"</span><span style="color: #1C1C1C;">:gg@@@@   </span><span style="color: #870000;">KW, </span><span style="color: #1C1C1C;">;g@gg </span><span style="color: #870000;">'@@] </span><span style="color: #1C1C1C;">@@@@ </span><span style="color: #870000;">@W@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W</span><span style="color: #262626;">:</span><span style="color: #1C1C1C;">|@@@@ </span><span style="color: #870000;">(g@@@@@@@@W  </span><span style="color: #1C1C1C;">[@@@@@g</span><span style="color: #870000;">`n@@@J </span><span style="color: #1C1C1C;">.y@@@@@@ </span><span style="color: #870000;">_@@@,</span><span style="color: #262626;">,</span><span style="color: #1C1C1C;">[@@@@.</span><span style="color: #870000;">'@R</span><span style="color: #5F0000;">, </span><span style="color: #1C1C1C;">@@D?</span><span style="color: #5F0000;">.</span><span style="color: #870000;">M@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W</span><span style="color: #5F0000;">:</span><span style="color: #262626;">'</span><span style="color: #1C1C1C;">j@@|</span><span style="color: #262626;">,</span><span style="color: #870000;">jWB@@@@@@@@@P</span><span style="color: #262626;">`</span><span style="color: #1C1C1C;">SB@@@@g</span><span style="color: #262626;">, </span><span style="color: #870000;">@F   </span><span style="color: #1C1C1C;">@@@@@B </span><span style="color: #5F0000;">,</span><span style="color: #870000;">J4@@@K </span><span style="color: #5F0000;">. </span><span style="color: #1C1C1C;">B </span><span style="color: #262626;">^</span><span style="color: #870000;">_[[`</span><span style="color: #262626;">' </span><span style="color: #1C1C1C;">@@k  </span><span style="color: #870000;">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BP </span><span style="color: #1C1C1C;">@@@@|</span><span style="color: #870000;">;XW' </span><span style="color: #1C1C1C;">___ </span><span style="color: #870000;">'']%@@@</span><span style="color: #5F0000;">\</span><span style="color: #262626;">:</span><span style="color: #1C1C1C;">@@@@@g____[@@@@"" </span><span style="color: #870000;">_H"<4>B@BJ@WaP~ </span><span style="color: #1C1C1C;">__@@@""</span><span style="color: #870000;">.@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@] </span><span style="color: #1C1C1C;">@@@g'</span><span style="color: #870000;">]h </span><span style="color: #1C1C1C;">,&@@@_,</span><span style="color: #5F0000;">.</span><span style="color: #870000;">@@@@[</span><span style="color: #5F0000;">`</span><span style="color: #262626;">. </span><span style="color: #1C1C1C;">@@@@@@@@@@@@C</span><span style="color: #262626;">- </span><span style="color: #870000;">q </span><span style="color: #1C1C1C;">______     </span><span style="color: #262626;">,</span><span style="color: #1C1C1C;">___@@@` </span><span style="color: #5F0000;">,</span><span style="color: #870000;">/$&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@, </span><span style="color: #1C1C1C;">@@@@_</span><span style="color: #870000;">7@_ </span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">@@@</span><span style="color: #262626;">.  </span><span style="color: #870000;">@@@@g@, </span><span style="color: #1C1C1C;">@@@@@@@@@@@</span><span style="color: #262626;">: </span><span style="color: #870000;">yg,  </span><span style="color: #1C1C1C;">T@@@@gggggg@@@@| </span><span style="color: #5F0000;">.</span><span style="color: #870000;">_@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' </span><span style="color: #1C1C1C;">@@@@|</span><span style="color: #5F0000;">'</span><span style="color: #870000;">X@%,</span><span style="color: #5F0000;">. </span><span style="color: #262626;">' </span><span style="color: #870000;">~@@@@@@@L</span><span style="color: #5F0000;">` </span><span style="color: #1C1C1C;">[@@@@@@@|</span><span style="color: #5F0000;">.</span><span style="color: #870000;">_@@@@B,  </span><span style="color: #1C1C1C;">:</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">@@@@@@@@  </span><span style="color: #870000;">___@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">|@@|</span><span style="color: #262626;">. </span><span style="color: #870000;">'#@@@@@@@@@@@B@@  </span><span style="color: #1C1C1C;">[@@@@BB </span><span style="color: #870000;">.+@@@@@@@@@<B>_____,*__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@gL</span><span style="color: #1C1C1C;">'9@@@@__</span><span style="color: #262626;">,</span><span style="color: #870000;"><4@@@@@BPP </span><span style="color: #1C1C1C;">__@@@@F"</span><span style="color: #262626;">'</span><span style="color: #870000;">,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@D</span><span style="color: #5F0000;">`</span><span style="color: #1C1C1C;">'</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">@@@@$____________@@@@g  </span><span style="color: #262626;">`</span><span style="color: #870000;">qg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@gW_  </span><span style="color: #262626;">,</span><span style="color: #1C1C1C;">[@@@@@@@@@@@@@@@@   </span><span style="color: #870000;">4g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@k___</span><span style="color: #5F0000;">.   </span><span style="color: #1C1C1C;">@@@@@</span><span style="color: #262626;">:.</span><span style="color: #5F0000;">.</span><span style="color: #870000;">_,4@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@L]g@@@m-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span></pre>
+                    </div>
+                    <div class="item" style="color: var(--gray); font-size: 0.85rem; margin-top: 0.5rem; font-style: italic;">
+                        → <span class="highlight">Kuru Dynasty Logo</span> - Historical ASCII art representation
+                    </div>
+                </div>
+            </div>
+            
             <div class="status-bar">
                 <div><span class="prompt">$</span><span class="command">_</span><span class="cursor"></span></div>
             </div>
@@ -533,6 +712,50 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.1.0/ansi_up.min.js"></script> -->
     
     <script>
+        // Dark mode functionality
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme === 'auto' ? (prefersDark ? 'dark' : 'light') : savedTheme;
+            
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeButton(theme);
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton(newTheme);
+        }
+        
+        function updateThemeButton(theme) {
+            const themeIcon = document.querySelector('.theme-icon');
+            const themeText = document.querySelector('.theme-text');
+            
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+            }
+        }
+        
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', initializeTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (localStorage.getItem('theme') === 'auto') {
+                const theme = e.matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+                updateThemeButton(theme);
+            }
+        });
+        
         // Terminal button functionality
         function closeTerminal() {
             if (confirm('Are you sure you want to close this terminal? (Just kidding, this is a portfolio!)')) {
