@@ -360,6 +360,8 @@
             border: 1px solid var(--border);
             border-left: 3px solid var(--green);
             font-family: inherit;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         
         .marquee-content {
@@ -367,11 +369,12 @@
             animation: marquee 40s linear infinite;
             animation-delay: 0.5s;
             animation-fill-mode: both;
+            will-change: transform;
         }
         
         @keyframes marquee {
-            0% { transform: translateX(20%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translate3d(10vw, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
         }
         
         .easter-egg {
@@ -420,6 +423,16 @@
             .kuru-dynasty-art pre {
                 font-size: 8pt;
                 overflow-x: auto;
+            }
+            
+            /* Fix marquee for mobile */
+            .marquee-content {
+                animation-duration: 30s;
+            }
+            
+            @keyframes marquee {
+                0% { transform: translate3d(25vw, 0, 0); }
+                100% { transform: translate3d(-100%, 0, 0); }
             }
         }
     </style>
