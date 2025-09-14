@@ -432,8 +432,8 @@
                 <div class="terminal-title">rudradev@portfolio: ~</div>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
-                <span class="theme-icon">🌙</span>
-                <span class="theme-text">Dark</span>
+                <span class="theme-icon">[○]</span>
+                <span class="theme-text">dark</span>
             </button>
         </div>
         
@@ -602,11 +602,11 @@
             const themeText = document.querySelector('.theme-text');
             
             if (theme === 'dark') {
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light';
+                themeIcon.textContent = '[●]';
+                themeText.textContent = 'light';
             } else {
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark';
+                themeIcon.textContent = '[○]';
+                themeText.textContent = 'dark';
             }
         }
         
