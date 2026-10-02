@@ -509,8 +509,10 @@
         
         @media (max-width: 768px) {
             html,
-            body {
+            body,
+            .terminal {
                 overflow-x: clip;
+                max-width: 100%;
             }
 
             body {
@@ -535,72 +537,93 @@
                 gap: 1rem;
             }
 
+            /* Definite-width + min-width:0 chain so ASCII min-content cannot widen the page */
+            .terminal,
+            .terminal-body,
             .header,
             .header-layout,
-            .name-section {
+            .name-section,
+            .kuru-dynasty-badge,
+            .kuru-dynasty-scale,
+            .kuru-dynasty-art,
+            .section,
+            .output,
+            .project-item,
+            .project-tech,
+            .project-desc,
+            .exp-role,
+            .exp-sub,
+            .item {
                 min-width: 0;
                 max-width: 100%;
             }
 
             .kuru-dynasty-badge {
                 display: block;
-                min-width: 0;
                 width: 100%;
-                max-width: 100%;
             }
 
-            /* Keep fixed 5px Cascadia art; scroll horizontally inside badge.
-               Avoid transform:scale/cqi — scaled box still took unscaled space
-               (or height collapsed / overflow clipped) and hid the art on phones. */
+            /*
+              Fit 110-col / 5px Cascadia art into the badge width.
+              Wrapper clips only; pre is shrunk via zoom (Chrome/Android) or
+              font-size (fallback) by fitKuruArt — not transform:scale (layout
+              space) and not overflow-x:auto (still widened the page).
+            */
             .kuru-dynasty-scale {
                 width: 100%;
                 max-width: 100%;
-                min-width: 0;
                 margin: 0.5rem 0 0;
+                container-type: inline-size;
+                container-name: kuru;
             }
 
             .kuru-dynasty-art {
                 position: static;
-                left: auto;
-                top: auto;
                 width: 100%;
                 max-width: 100%;
                 margin: 0;
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
+                overflow: hidden; /* clip art only; do not expand page */
+                display: flex;
+                justify-content: center;
                 transform: none;
             }
 
             .kuru-dynasty-art pre {
                 display: block;
+                /* CSS-first estimate: ~0.62em mono advance → 110 cells ≈ 68em */
+                font-size: min(5px, calc(100cqw / 68));
+                line-height: 1;
                 width: max-content;
                 max-width: none;
-                font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
-                font-size: 5px;
-                line-height: 1;
+                min-width: 0;
+                margin: 0;
+                white-space: pre;
+                overflow: hidden;
                 transform: none;
-                overflow: visible;
+                font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
                 user-select: text;
                 -webkit-user-select: text;
+                -webkit-text-size-adjust: none;
+                text-size-adjust: none;
             }
 
-            .project-item,
             .project-tech,
             .project-desc,
-            .exp-role,
             .exp-sub,
-            .output,
-            .section {
+            .exp-role,
+            .item,
+            .tagline {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            .exp-header {
                 min-width: 0;
                 max-width: 100%;
             }
 
-            .project-tech,
-            .project-desc,
-            .exp-sub {
-                overflow-wrap: anywhere;
-                word-break: break-word;
+            .link-kind {
+                white-space: normal;
             }
 
             /* Keep status marquee inside the terminal; do not widen the page */
@@ -891,6 +914,53 @@
         }
         
         // Initialize theme on page load
+        
+        // Fit Kuru ASCII badge to available width on phones (zoom preferred;
+        // font-size fallback). Keeps 5px glyph metrics, avoids page overflow.
+        function fitKuruArt() {
+            const art = document.querySelector('.kuru-dynasty-art');
+            const pre = art && art.querySelector('pre');
+            if (!pre) return;
+
+            const mobile = window.matchMedia('(max-width: 768px)').matches;
+            pre.style.zoom = '';
+            pre.style.fontSize = '';
+            pre.style.transform = '';
+
+            if (!mobile) return;
+
+            // Measure at desktop glyph size, then shrink to client width
+            pre.style.fontSize = '5px';
+            pre.style.zoom = '1';
+
+            const avail = art.clientWidth;
+            const need = pre.scrollWidth;
+            if (!(avail > 0 && need > 0)) return;
+
+            if (need <= avail) {
+                // CSS cqw sizing already fits; clear inline overrides
+                pre.style.zoom = '';
+                pre.style.fontSize = '';
+                return;
+            }
+
+            const ratio = avail / need;
+            // zoom scales layout + paint in Chromium/Android WebView
+            if (typeof CSS !== 'undefined' && CSS.supports && CSS.supports('zoom', '0.5')) {
+                pre.style.fontSize = '5px';
+                pre.style.zoom = String(ratio);
+            } else {
+                pre.style.zoom = '';
+                pre.style.fontSize = (5 * ratio) + 'px';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fitKuruArt);
+        window.addEventListener('resize', fitKuruArt);
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(fitKuruArt);
+        }
+
         document.addEventListener('DOMContentLoaded', initializeTheme);
         
         // Listen for system theme changes
