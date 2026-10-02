@@ -179,6 +179,7 @@
         
         .kuru-dynasty-link {
             display: inline-block;
+            min-width: 0;
             max-width: 100%;
             text-decoration: none;
             color: inherit;
@@ -495,6 +496,11 @@
         }
         
         @media (max-width: 768px) {
+            html,
+            body {
+                overflow-x: clip;
+            }
+
             body {
                 padding: 1rem;
             }
@@ -516,13 +522,29 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
+
+            .kuru-dynasty-link {
+                display: block;
+                min-width: 0;
+                width: 100%;
+                max-width: 100%;
+            }
             
             .kuru-dynasty-art {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
                 margin: 0.5rem auto;
+                overflow: hidden;
             }
             
             .kuru-dynasty-art pre {
-                font-size: 5px;
+                font-family: 'Geist Mono', 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
+                /* ~0.6em mono advance: size 110 cells to content width; desktop stays 5px */
+                font-size: clamp(2.4px, calc((100vw - 5rem) / 68), 5px);
+                line-height: 1;
+                overflow: hidden;
+                max-width: 100%;
             }
             
             /* Fix marquee for mobile */
