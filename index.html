@@ -179,27 +179,36 @@
         
         .kuru-dynasty-art {
             background: #0C0C0C;
-            color: #CCCCCC;
-            text-align: center;
-            padding: 0.3rem;
             border-radius: 6px;
             border: 1px solid var(--border);
-            font-variant-ligatures: none;
-            font-feature-settings: 'liga' 0, 'clig' 0;
+            overflow: hidden;
+            max-width: 220px;
+            flex-shrink: 0;
         }
         
         .kuru-dynasty-art pre {
             font-family: 'Cascadia Code', 'Courier New', 'Monaco', 'Menlo', monospace;
-            font-size: 8pt;
+            font-size: 2px;
             line-height: 1;
-            margin: 10px 0;
+            letter-spacing: 0;
+            margin: 0;
+            padding: 4px;
             white-space: pre;
-            overflow: auto;
+            overflow-x: auto;
+            color: #8B0000;
+            background: #0C0C0C;
+            font-variant-ligatures: none;
+            font-feature-settings: 'liga' 0, 'clig' 0;
         }
         
         [data-theme="dark"] .kuru-dynasty-art {
             background: #0C0C0C;
-            color: #CCCCCC;
+            border-color: #333;
+        }
+        
+        [data-theme="dark"] .kuru-dynasty-art pre {
+            color: #8B0000;
+            background: #0C0C0C;
         }
         
         .tagline {
@@ -416,12 +425,12 @@
             }
             
             .kuru-dynasty-art {
-                padding: 0.5rem;
-                margin: 0.5rem 0;
+                max-width: 160px;
+                margin: 0.5rem auto;
             }
             
             .kuru-dynasty-art pre {
-                font-size: 8pt;
+                font-size: 1.5px;
                 overflow-x: auto;
             }
             
@@ -464,26 +473,87 @@
                             "building scalable systems and solving problems, one algorithm at a time"
                         </div>
                     </div>
-                    <div class="kuru-dynasty-art">
-                        <pre><span style="color: #870000;">ggggggggggggggggggmmmygggggggggggggggggggg
-@@@@@@@@@@@@@@B&apos;</span><span style="color: #1C1C1C;">__Lo@L_</span><span style="color: #870000;">^B@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@ </span><span style="color: #1C1C1C;">_G&quot;&quot;&quot;&quot;&quot;&quot;@@,</span><span style="color: #870000;">&apos;@@@@@@@@@@@@@@@@
-@@@@@@@@@@@D</span><span style="color: #1C1C1C;">.[T</span><span style="color: #870000;">.gDBE@B </span><span style="color: #1C1C1C;">^@L </span><span style="color: #870000;">@@@@@@@@@@@@@@@
-@@@@@@@@@@@ </span><span style="color: #1C1C1C;">gN </span><span style="color: #870000;">@@ </span><span style="color: #1C1C1C;">gg </span><span style="color: #870000;">@@_ </span><span style="color: #1C1C1C;">= </span><span style="color: #870000;">@@@@@@@@@@@@@@@
-@@@@@@@@@@&apos;</span><span style="color: #1C1C1C;">_@ </span><span style="color: #870000;">=BB_</span><span style="color: #5F0000;">. </span><span style="color: #870000;">_@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@ </span><span style="color: #1C1C1C;">@@@@@@@WL</span><span style="color: #262626;">~</span><span style="color: #1C1C1C;">_..__</span><span style="color: #870000;">&quot;&quot;&quot;=B@@@@@@@@@@@
-@@@@@@@@@@;</span><span style="color: #1C1C1C;">&quot;@@@@@@@@@@@@@@@@@@, </span><span style="color: #870000;">+@@@@@@@@@
-@@@@@@@@@@g </span><span style="color: #1C1C1C;">B@|</span><span style="color: #870000;">!g@@mmggg,</span><span style="color: #5F0000;">.</span><span style="color: #1C1C1C;">[@@` BL</span><span style="color: #262626;">.</span><span style="color: #870000;">@@@@@@@@
-@@@@@@@@@@@g</span><span style="color: #1C1C1C;">&apos;@@ </span><span style="color: #870000;">tf </span><span style="color: #1C1C1C;">__ </span><span style="color: #870000;">&apos;@&quot;</span><span style="color: #1C1C1C;">_@@ </span><span style="color: #870000;">_@,</span><span style="color: #1C1C1C;">|g </span><span style="color: #870000;">@@@@@@@
-@@@@@@@@@0@@i</span><span style="color: #1C1C1C;">&quot;@@</span><span style="color: #262626;">.</span><span style="color: #870000;">|</span><span style="color: #1C1C1C;">&quot;@@@ </span><span style="color: #870000;">?</span><span style="color: #1C1C1C;">_@@&quot;</span><span style="color: #870000;">_@@@</span><span style="color: #262626;">`</span><span style="color: #1C1C1C;">[|</span><span style="color: #870000;">&apos;@@@@@@
-@@@@@@M</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">_ </span><span style="color: #870000;">M@@_</span><span style="color: #1C1C1C;">&apos;@@ </span><span style="color: #870000;">.</span><span style="color: #1C1C1C;">&apos;&quot;`</span><span style="color: #870000;">`</span><span style="color: #1C1C1C;">,@@&quot;</span><span style="color: #870000;">;  &quot;@g</span><span style="color: #1C1C1C;">[w </span><span style="color: #870000;">@@@@@@
-@@@@@@ </span><span style="color: #1C1C1C;">@B </span><span style="color: #870000;">@@@@,</span><span style="color: #1C1C1C;">^@] </span><span style="color: #870000;">8W&apos;</span><span style="color: #1C1C1C;">|@@ </span><span style="color: #870000;">_g</span><span style="color: #262626;">&apos;</span><span style="color: #1C1C1C;">@{</span><span style="color: #870000;">[}</span><span style="color: #1C1C1C;">[@</span><span style="color: #5F0000;">.</span><span style="color: #870000;">@@@@@@
-@@@@@@ </span><span style="color: #1C1C1C;">@ </span><span style="color: #870000;">@&quot;</span><span style="color: #1C1C1C;">_</span><span style="color: #870000;">&apos;B@ </span><span style="color: #1C1C1C;">[@_</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">_g@f </span><span style="color: #870000;">aB@L-&lt;~</span><span style="color: #1C1C1C;">_@&apos;</span><span style="color: #870000;">{@@@@@@
-@@@@@g</span><span style="color: #1C1C1C;">[[ </span><span style="color: #870000;">*</span><span style="color: #1C1C1C;">~@r</span><span style="color: #5F0000;">,</span><span style="color: #870000;">@g </span><span style="color: #1C1C1C;">@@@@@&quot;</span><span style="color: #870000;">_</span><span style="color: #5F0000;">.</span><span style="color: #1C1C1C;">:~___a_P </span><span style="color: #870000;">/@@@@@@@
-@@@@@W</span><span style="color: #1C1C1C;">&apos;@ </span><span style="color: #870000;">Ta__8@@g </span><span style="color: #1C1C1C;">@@W </span><span style="color: #870000;">+@@_ </span><span style="color: #1C1C1C;">&quot;&quot;&quot;&quot;</span><span style="color: #870000;">_~@@@@@@@@@
-@@@@@@g </span><span style="color: #1C1C1C;">@L,</span><span style="color: #870000;">&apos;&quot;&quot;D&quot;</span><span style="color: #262626;">.</span><span style="color: #1C1C1C;">_@&quot;</span><span style="color: #870000;">,g@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@, </span><span style="color: #1C1C1C;">BmW@JBdF </span><span style="color: #870000;">g@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@r___g@@@@@@@@@@@@@@@@@@@@@@@@@</span></pre>
+                    <div class="kuru-dynasty-art" aria-label="Kuru Dynasty emblem">
+                        <pre>                                                    ░▒▓▓██▒░                                                            
+                                                ▒█████████████▒                                                         
+                                              ▒█████████████████▒                                                       
+                                             █████████████████████                                                      
+                                           ░███████████████████████▒                                                    
+                                          ▒██████████████████████████                                                   
+                                         ▒████████████████████████████                                                  
+                                        ▒██████████████████████████████░                                                
+                                       ░███████████▓▒    ▒▓█████████████                                                
+                                       █████████▓           ░████████████                                               
+                                      █████████▒              ▒██████████▓                                              
+                                     ▓████████░                ░██████████░                                             
+                                    ░████████░                   ██████████                                             
+                                    ████████▒        ▒▓▒░         █████████                                             
+                                   ▒███████▓       ▒██████        ░████████░                                            
+                                   ████████        ████████        ▓███████▒                                            
+                                  ▒███████▒       ▒████████░        ███████▒                                            
+                                  ████████        █████████▒        ███████░                                            
+                                 ░███████▓        █████████░         █████▒                                             
+                                 ▓███████         ▓████████           ▒▒░                                               
+                                 ████████          ███████▒                                                             
+                                ░███████▒           █████▒                                                              
+                                ▒█████████▓▒░░                                                                          
+                                ▓████████████████████▓▒░                                                                
+                                ▓███████████████████████████▓▒▒░                                                        
+                                █████████████████████████████████████▓▒▒░░                                              
+                                ████████████████████████████████████████████████▓░                                      
+                                ▓███████████████████████████████████████████████████▒                                   
+                                ▓█████████████████████████████████████████████████████▒                                 
+                                ░███████████████████████████████████████████████████████                                
+                                 ████████████████████████████████████████████████████████░                              
+                                 █████████████████████████████████████████████████████████░                             
+                                 ▒█████████████████████████████████████████████████████████▒                            
+                                  ██████████            ░░░░░▒▒▓████████████████████████████▓                           
+                                  ██████████▒                         ░░█████████████████████▒                          
+                                  ░██████████                           ▒███████████▓█████████                          
+                                   ██████████                           ███████████░ ▒█████████                         
+                                   ▒█████████▓         ▒████▒          ▓███████████   ▓████████▒                        
+                                    ██████████       ░████████         ███████████░    █████████                        
+                                    ░██████████     ░██████████       ▓███████████      ████████░                       
+                                     ██████████░    ███████████▓     ░███████████░      ░████████                       
+                                     ░██████████   ▒████████████░    ███████████▒        ████████░                      
+                                      ██████████░  █████████████▓   ▒███████████          ███████▓                      
+                                      ░██████████  █████████████▓   ███████████▒          ████████                      
+                                       ██████████  █████████████▒  ▓███████████           ░███████                      
+                                       ░█████████▓ ░████████████   ███████████             ███████░                     
+                         ▒███▒          ██████████  ███████████▓  ███████████▓             ▓██████▒                     
+                        ▓█████░         ░█████████░  ██████████  ░███████████              ▒██████▓                     
+                       ░███████          █████████▓  ░████████░  ███████████░    ▒▓▒        ███████                     
+                       ████████          ░█████████░   ▓████▒   ███████████▓   ░█████▓      ███████                     
+                      ░████████           ██████████           ░███████████    ███████▒     ███████                     
+                      ████████▒           ▓█████████▒          ███████████    ▒████████     ███████                     
+                      ████████             ██████████         ███████████▓    ▒████████     ███████                     
+                     ▒███████▒             ▓█████████▓       ▒███████████     ▒████████    ░██████▓                     
+                     ▓███████               ██████████      ░███████████░      ████████    ▓██████▒                     
+                     ████████               ██████████▒    ░████████████       ▓██████▒    ███████░                     
+                     ███████░               ░██████████   ░████████████         ▒████▒    ████████                      
+                    ▒███████     ░▒▓░        ▓█████████▓  ████████████▒                  ▒███████▒                      
+                    ▓██████▒    ██████        ██████████▓█████████████                  ▒████████                       
+                    ███████    ████████       ▓██████████████████████  ░▓▓░            █████████▒                       
+                    ███████   ░████████▒       █████████████████████  ▓█████▒       ░▓██████████                        
+                    ███████   ░█████████       ▒███████████████████░ ░█████████████████████████                         
+                    ███████    █████████        ██████████████████░  ▒████████████████████████░                         
+                    ███████    █████████        ▒████████████████░   ▒███████████████████████▒                          
+                    ▓██████░   ░███████▒         ███████████████▒     ██████████████████████                            
+                    ▒██████▓    ██████░          ▓█████████████▒      ░███████████████████▒                             
+                    ░███████     ░▓▓▒             ████████████▓         ░███████████████▒                               
+                     ███████▓                     ▓███████████             ▒█████████▓░                                 
+                     ▓███████▓                    ███████████                                                           
+                      █████████░                 ███████████                                                            
+                      ▒█████████▒               ▓██████████░                                                            
+                       ███████████▒░           ███████████▒                                                             
+                        ██████████████▒░    ░▓███████████▓                                                              
+                        ░███████████████████████████████▓                                                               
+                          █████████████████████████████▓                                                                
+                           ███████████████████████████▒                                                                 
+                            ▒████████████████████████░                                                                  
+                              ▒████████████████████▒                                                                    
+                                 ░▓██████████████▒                                                                      
+                                     ░▒▓█████▓▒                                                                         </pre>
                     </div>
                 </div>
                 <div class="marquee">
