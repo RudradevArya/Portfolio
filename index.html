@@ -283,6 +283,30 @@
             color: var(--orange);
             font-weight: 500;
         }
+
+
+        .link-kind {
+            color: var(--gray);
+            font-size: 0.75rem;
+            font-weight: 400;
+            margin-left: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .link-kind a {
+            color: var(--blue);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .link-kind a::after {
+            content: none;
+        }
+
+        .link-kind a:hover {
+            border-bottom: 1px solid var(--blue);
+        }
         
         .cursor {
             animation: blink 1s infinite;
@@ -617,22 +641,27 @@
                 <div><span class="prompt">$</span><span class="command">ls -la projects/</span></div>
                 <div class="output">
                     <div class="project-item">
-                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/Lambda-Mailer-Backend" class="link" target="_blank">LambdaMailer</a></div>
+                        <div class="project-title">├─ LambdaMailer <span class="link-kind">[<a href="https://github.com/RudradevArya/Lambda-Mailer-Backend" target="_blank">github</a>]</span></div>
                         <div class="project-tech">Node.js | AWS Lambda | SES | Beanstalk | React</div>
                         <div class="project-desc">Scalable email service: <span class="highlight">99.2%</span> success rate for 50k emails at <span class="highlight">200 mails/sec</span> throughput</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/EventU" class="link" target="_blank">EventU</a></div>
+                        <div class="project-title">├─ Handkerchief <span class="link-kind">[<a href="https://handkerchief.projects.xrudra.dev" target="_blank">live</a>] [<a href="https://github.com/RudradevArya/handkerchief-visualisation" target="_blank">github</a>]</span></div>
+                        <div class="project-tech">HTML | CSS | JavaScript | CSS 3D transforms</div>
+                        <div class="project-desc">Interactive explainer of folding a handkerchief so you only wipe with clean faces — fold/wipe/unfold path with an 8→32 face model</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">├─ EventU <span class="link-kind">[<a href="https://github.com/RudradevArya/EventU" target="_blank">github</a>]</span></div>
                         <div class="project-tech">Next.js | Appwrite | TypeScript | NoSQL | TailwindCSS</div>
                         <div class="project-desc">Event management system with <span class="highlight">40%</span> reduction in data retrieval time</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">├─ <a href="https://github.com/RudradevArya/Python-Minecraft" class="link" target="_blank">Minecraft Replica</a></div>
+                        <div class="project-title">├─ Minecraft Replica <span class="link-kind">[<a href="https://github.com/RudradevArya/Python-Minecraft" target="_blank">github</a>]</span></div>
                         <div class="project-tech">Python | Pyglet | CUDA | Linear Algebra | OOP</div>
                         <div class="project-desc">128x128 block game with CUDA optimization: <span class="highlight">50 -> 270+ FPS</span></div>
                     </div>
                     <div class="project-item">
-                        <div class="project-title">└─ <a href="https://github.com/RudradevArya/Elevator-Simulation-nd-Estimation" class="link" target="_blank">Elevator Simulation System</a></div>
+                        <div class="project-title">└─ Elevator Simulation System <span class="link-kind">[<a href="https://github.com/RudradevArya/Elevator-Simulation-nd-Estimation" target="_blank">github</a>]</span></div>
                         <div class="project-tech">Java | Arduino | C++ | Algorithm Design | PoC</div>
                         <div class="project-desc">Real-world scheduling algorithms (Round Robin, Up Peak, Zoning) with Arduino PoC</div>
                     </div>
