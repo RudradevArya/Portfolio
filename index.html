@@ -329,6 +329,32 @@
             margin-bottom: 0.2rem;
         }
         
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .exp-dates {
+            color: var(--gray);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        .exp-role {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .exp-sub {
+            font-size: 0.82rem;
+            color: var(--text);
+            margin: 0.15rem 0 0.15rem 0.4rem;
+        }
+        
         .status-bar {
             margin-top: 1.5rem;
             padding-top: 0.8rem;
@@ -468,7 +494,7 @@
                 <div class="header-layout">
                     <div class="name-section">
                         <div class="name easter-egg">Rudradev Arya</div>
-                        <div class="tagline">cloud computing enthusiast • backend developer • problem solver</div>
+                        <div class="tagline">software engineer • backend • cloud / devops</div>
                         <div style="color: var(--gray); font-size: 0.8rem; margin-top: 0.3rem; font-style: italic;">
                             "building scalable systems and solving problems, one algorithm at a time"
                         </div>
@@ -520,7 +546,7 @@
                 </div>
                 <div class="marquee">
                     <div class="marquee-content">
-                        [STATUS] Available for opportunities | [ACHIEVEMENT] Top 30/2000+ on GeeksForGeeks leaderboard | [STATS] 400+ DSA problems solved | [CERT] AWS Certified | [ROLE] Full-stack/Backend Developer | [FOCUS] Cloud Computing Enthusiast
+                        [STATUS] Software Engineer @ Siemens DISW | [ACHIEVEMENT] Top 30/2000+ on GeeksForGeeks leaderboard | [STATS] 400+ DSA problems solved | [CERT] AWS Certified | [ROLE] Backend / Cloud / DevOps | [FOCUS] Secure pipelines and platform work
                     </div>
                 </div>
             </div>
@@ -539,6 +565,51 @@
                 <div><span class="prompt">$</span><span class="command">cat resume.pdf</span></div>
                 <div class="output">
                     <div class="item">└─ <a href="https://drive.google.com/file/d/1G38ddDamPIeXKVn8qj0UknGX01p81VAT/view?usp=drive_link" class="link" target="_blank">resume.pdf <span class="highlight">[View/Download]</span></a></div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div><span class="prompt">$</span><span class="command">cat experience.log</span></div>
+                <div class="output">
+                    <div class="project-item">
+                        <div class="project-title exp-header">
+                            <span>├─ Siemens Digital Industries Software</span>
+                            <span class="exp-dates">Aug 2025 – Present</span>
+                        </div>
+                        <div class="exp-role">Software Engineer · Pune</div>
+                        <div class="project-tech">React | Express | MongoDB | GitLab CI | Coverity | Ansible | Terraform | AWS AMI</div>
+                        <div class="project-desc">TCX Sandbox onboarding portal, Coverity/GitLab CI, SI/CVE work on TCX apps and RHEL UBI/AMIs, golden AMI pipeline with Teamcenter X tools</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title exp-header">
+                            <span>├─ Pratiti Technologies</span>
+                            <span class="exp-dates">Jul 2025 – Aug 2025</span>
+                        </div>
+                        <div class="exp-role">DevOps Intern · Pune</div>
+                        <div class="project-tech">Terraform | Ansible | AWS | CI/CD</div>
+                        <div class="project-desc">IaC for AWS networking/compute/IAM, Ansible host setup, and CI so infra and config changes applied the same way everywhere</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title exp-header">
+                            <span>├─ Unizoy</span>
+                            <span class="exp-dates">Apr 2025 – Jul 2025</span>
+                        </div>
+                        <div class="exp-role">Backend Developer Intern · Remote</div>
+                        <div class="project-tech">NestJS | TypeScript | PostgreSQL | TypeORM | BullMQ | S3 | JWT</div>
+                        <div class="project-desc">iDelta Books trading back-office: NSE/BSE/MCX CSV ingest, dual-UCC P&amp;L, async CSV/Excel exports to S3, cost-log/KYC on a hexagonal NestJS core</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title exp-header">
+                            <span>└─ Freelance</span>
+                            <span class="exp-dates">2024 – 2025</span>
+                        </div>
+                        <div class="exp-role">Software Developer · Remote</div>
+                        <div class="project-tech">C++17 | Boost.Asio | WebSockets | React | GitHub Actions | AWS CI/CD | Docker</div>
+                        <div class="exp-sub">├─ Deribit Testnet execution client — REST + TLS WebSocket order APIs</div>
+                        <div class="exp-sub">├─ Live OKX L2 order-book ingest for a crypto trade simulator</div>
+                        <div class="exp-sub">├─ MahaCPD — frontend and tests for Maharashtra doctors' yearly CPD/seminar points</div>
+                        <div class="exp-sub">└─ Stealth dApp/DAO platform — GitHub Actions, AWS CI/CD, Docker images</div>
+                    </div>
                 </div>
             </div>
             
@@ -574,19 +645,19 @@
                     <div class="compact-grid">
                         <div>
                             <div class="highlight">Languages:</div>
-                            <div>Python | C/C++ | JavaScript | TypeScript | CUDA</div>
+                            <div>Python | C/C++17 | TypeScript | JavaScript | CUDA</div>
                         </div>
                         <div>
-                            <div class="highlight">Cloud & AWS:</div>
-                            <div>Lambda | SES | S3 | RDS | Beanstalk | GCP</div>
+                            <div class="highlight">Cloud & IaC:</div>
+                            <div>AWS | Terraform | Ansible | GitLab CI | Docker</div>
                         </div>
                         <div>
                             <div class="highlight">Frameworks:</div>
-                            <div>React | Next.js | Node.js | Express.js</div>
+                            <div>NestJS | React | Next.js | Node.js | BullMQ</div>
                         </div>
                         <div>
                             <div class="highlight">Databases:</div>
-                            <div>MongoDB | Firebase | Redis | NoSQL</div>
+                            <div>PostgreSQL | MongoDB | Redis | TypeORM</div>
                         </div>
                     </div>
                 </div>
