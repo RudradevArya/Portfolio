@@ -535,47 +535,52 @@
                 gap: 1rem;
             }
 
+            .header,
+            .header-layout,
+            .name-section {
+                min-width: 0;
+                max-width: 100%;
+            }
+
             .kuru-dynasty-badge {
                 display: block;
                 min-width: 0;
                 width: 100%;
                 max-width: 100%;
-                container-type: inline-size;
             }
 
-            /* Scale fixed 5px art to fit; keeps cell proportions like desktop.
-               Badge is the query container so 100cqi works on descendants. */
+            /* Keep fixed 5px Cascadia art; scroll horizontally inside badge.
+               Avoid transform:scale/cqi — scaled box still took unscaled space
+               (or height collapsed / overflow clipped) and hid the art on phones. */
             .kuru-dynasty-scale {
-                --kuru-nat-w: 340px; /* 110 cells x ~0.6em at 5px + metric slack */
-                --kuru-nat-h: 210px; /* 42 rows x 5px */
-                --kuru-s: min(1, 100cqi / var(--kuru-nat-w));
                 width: 100%;
                 max-width: 100%;
                 min-width: 0;
-                height: calc(var(--kuru-nat-h) * var(--kuru-s));
-                overflow: hidden;
-                position: relative;
                 margin: 0.5rem 0 0;
             }
-            
+
             .kuru-dynasty-art {
-                position: absolute;
-                left: 50%;
-                top: 0;
+                position: static;
+                left: auto;
+                top: auto;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                transform: none;
+            }
+
+            .kuru-dynasty-art pre {
+                display: block;
                 width: max-content;
                 max-width: none;
-                margin: 0;
-                overflow: hidden;
-                transform: translateX(-50%) scale(var(--kuru-s));
-                transform-origin: top center;
-            }
-            
-            .kuru-dynasty-art pre {
                 font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
                 font-size: 5px;
                 line-height: 1;
+                transform: none;
                 overflow: visible;
-                max-width: none;
                 user-select: text;
                 -webkit-user-select: text;
             }
@@ -597,14 +602,21 @@
                 overflow-wrap: anywhere;
                 word-break: break-word;
             }
-            
-            /* Fix marquee for mobile */
+
+            /* Keep status marquee inside the terminal; do not widen the page */
+            .marquee {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+            }
+
             .marquee-content {
                 animation-duration: 30s;
             }
-            
+
             @keyframes marquee {
-                0% { transform: translate3d(25vw, 0, 0); }
+                0% { transform: translate3d(100%, 0, 0); }
                 100% { transform: translate3d(-100%, 0, 0); }
             }
         }
