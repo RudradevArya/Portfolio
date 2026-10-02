@@ -177,21 +177,20 @@
             margin-bottom: 0.3rem;
         }
         
-        .kuru-dynasty-link {
+        .kuru-dynasty-badge {
             display: inline-block;
             min-width: 0;
             max-width: 100%;
-            text-decoration: none;
             color: inherit;
-            outline: none;
         }
 
-        .kuru-dynasty-link::after {
-            content: none;
+        .kuru-dynasty-scale {
+            display: block;
+            max-width: 100%;
         }
 
-        .kuru-dynasty-link:hover .kuru-dynasty-art,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-art {
+        .kuru-dynasty-badge:hover .kuru-dynasty-art,
+        .kuru-dynasty-badge:focus-within .kuru-dynasty-art {
             filter: brightness(1.08);
         }
 
@@ -202,14 +201,25 @@
             color: var(--gray);
             letter-spacing: 0.02em;
             text-align: right;
+            text-decoration: none;
             opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
+            transition: opacity 0.2s ease, color 0.2s ease;
         }
 
-        .kuru-dynasty-link:hover .kuru-dynasty-caption,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-caption {
+        .kuru-dynasty-caption::after {
+            content: none;
+        }
+
+        .kuru-dynasty-badge:hover .kuru-dynasty-caption,
+        .kuru-dynasty-badge:focus-within .kuru-dynasty-caption {
             opacity: 1;
+        }
+
+        .kuru-dynasty-caption:hover,
+        .kuru-dynasty-caption:focus-visible {
+            color: var(--blue);
+            text-decoration: underline;
+            outline: none;
         }
 
         @media (hover: none) {
@@ -244,6 +254,8 @@
             max-width: 100%;
             -webkit-text-size-adjust: none;
             text-size-adjust: none;
+            user-select: text;
+            -webkit-user-select: text;
         }
         
         .kuru-dynasty-art .ks { color: #2D1C22; }
@@ -523,28 +535,67 @@
                 gap: 1rem;
             }
 
-            .kuru-dynasty-link {
+            .kuru-dynasty-badge {
                 display: block;
                 min-width: 0;
                 width: 100%;
                 max-width: 100%;
+                container-type: inline-size;
             }
-            
-            .kuru-dynasty-art {
+
+            /* Scale fixed 5px art to fit; keeps cell proportions like desktop.
+               Badge is the query container so 100cqi works on descendants. */
+            .kuru-dynasty-scale {
+                --kuru-nat-w: 340px; /* 110 cells x ~0.6em at 5px + metric slack */
+                --kuru-nat-h: 210px; /* 42 rows x 5px */
+                --kuru-s: min(1, 100cqi / var(--kuru-nat-w));
                 width: 100%;
                 max-width: 100%;
                 min-width: 0;
-                margin: 0.5rem auto;
+                height: calc(var(--kuru-nat-h) * var(--kuru-s));
                 overflow: hidden;
+                position: relative;
+                margin: 0.5rem 0 0;
+            }
+            
+            .kuru-dynasty-art {
+                position: absolute;
+                left: 50%;
+                top: 0;
+                width: max-content;
+                max-width: none;
+                margin: 0;
+                overflow: hidden;
+                transform: translateX(-50%) scale(var(--kuru-s));
+                transform-origin: top center;
             }
             
             .kuru-dynasty-art pre {
-                font-family: 'Geist Mono', 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
-                /* ~0.6em mono advance: size 110 cells to content width; desktop stays 5px */
-                font-size: clamp(2.4px, calc((100vw - 5rem) / 68), 5px);
+                font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
+                font-size: 5px;
                 line-height: 1;
-                overflow: hidden;
+                overflow: visible;
+                max-width: none;
+                user-select: text;
+                -webkit-user-select: text;
+            }
+
+            .project-item,
+            .project-tech,
+            .project-desc,
+            .exp-role,
+            .exp-sub,
+            .output,
+            .section {
+                min-width: 0;
                 max-width: 100%;
+            }
+
+            .project-tech,
+            .project-desc,
+            .exp-sub {
+                overflow-wrap: anywhere;
+                word-break: break-word;
             }
             
             /* Fix marquee for mobile */
@@ -586,7 +637,8 @@
                             "building scalable systems and solving problems, one algorithm at a time"
                         </div>
                     </div>
-                    <a class="kuru-dynasty-link" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer" title="Try the ASCII art tool">
+                    <div class="kuru-dynasty-badge">
+                    <div class="kuru-dynasty-scale">
                     <div class="kuru-dynasty-art">
                         <pre aria-label="Kuru dynasty symbol"><span class="kb">░░░░░░▒░░░░░░░░░░░░░░</span> <span class="kb">░▒▒░░░░░░░▒░░░░▒░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░▒░░░░░▒░▒</span> <span class="kb">░░░░░░░░░░</span>
 <span class="kb">░░</span> <span class="kb">░▒░░</span> <span class="kb">░░▒░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░▒▒▒░░░░▒░</span> <span class="kb">░▒░░░░░░░░▒░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░</span> <span class="kb">░</span>
@@ -631,8 +683,9 @@
 <span class="kb">░░▒▒░░░░░</span>  <span class="kb">░░░</span> <span class="kb">░░░░░▒░░░▒</span> <span class="kb">▒</span> <span class="kb">░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░░░░░▒░░</span>  <span class="kb">░░░░░░░░░</span> <span class="kb">░░▒░░░░░░░▒</span> <span class="kb">░▒░░░░░░░░░</span> <span class="kb">░</span>
 <span class="kb">░</span> <span class="kb">░░░</span> <span class="kb">░░</span> <span class="kb">░</span> <span class="kb">░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░▒</span> <span class="kb">░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░</span></pre>
                     </div>
-                    <span class="kuru-dynasty-caption">$ blockart</span>
-                    </a>
+                    </div>
+                    <a class="kuru-dynasty-caption" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer" title="Try the ASCII art tool">$ blockart</a>
+                    </div>
                 </div>
                 <div class="marquee">
                     <div class="marquee-content">
