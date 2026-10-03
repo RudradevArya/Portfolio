@@ -177,20 +177,20 @@
             margin-bottom: 0.3rem;
         }
         
-        .kuru-dynasty-link {
+        .kuru-dynasty-badge {
             display: inline-block;
+            min-width: 0;
             max-width: 100%;
-            text-decoration: none;
             color: inherit;
-            outline: none;
         }
 
-        .kuru-dynasty-link::after {
-            content: none;
+        .kuru-dynasty-scale {
+            display: block;
+            max-width: 100%;
         }
 
-        .kuru-dynasty-link:hover .kuru-dynasty-art,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-art {
+        .kuru-dynasty-badge:hover .kuru-dynasty-art,
+        .kuru-dynasty-badge:focus-within .kuru-dynasty-art {
             filter: brightness(1.08);
         }
 
@@ -201,14 +201,25 @@
             color: var(--gray);
             letter-spacing: 0.02em;
             text-align: right;
+            text-decoration: none;
             opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
+            transition: opacity 0.2s ease, color 0.2s ease;
         }
 
-        .kuru-dynasty-link:hover .kuru-dynasty-caption,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-caption {
+        .kuru-dynasty-caption::after {
+            content: none;
+        }
+
+        .kuru-dynasty-badge:hover .kuru-dynasty-caption,
+        .kuru-dynasty-badge:focus-within .kuru-dynasty-caption {
             opacity: 1;
+        }
+
+        .kuru-dynasty-caption:hover,
+        .kuru-dynasty-caption:focus-visible {
+            color: var(--blue);
+            text-decoration: underline;
+            outline: none;
         }
 
         @media (hover: none) {
@@ -243,6 +254,8 @@
             max-width: 100%;
             -webkit-text-size-adjust: none;
             text-size-adjust: none;
+            user-select: text;
+            -webkit-user-select: text;
         }
         
         .kuru-dynasty-art .ks { color: #2D1C22; }
@@ -495,6 +508,13 @@
         }
         
         @media (max-width: 768px) {
+            html,
+            body,
+            .terminal {
+                overflow-x: clip;
+                max-width: 100%;
+            }
+
             body {
                 padding: 1rem;
             }
@@ -516,22 +536,124 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
+
+            /* Definite-width + min-width:0 chain so ASCII min-content cannot widen the page */
+            .terminal,
+            .terminal-body,
+            .header,
+            .header-layout,
+            .name-section,
+            .kuru-dynasty-badge,
+            .kuru-dynasty-scale,
+            .kuru-dynasty-art,
+            .section,
+            .output,
+            .project-item,
+            .project-tech,
+            .project-desc,
+            .exp-role,
+            .exp-sub,
+            .item {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            .kuru-dynasty-badge {
+                display: block;
+                width: 100%;
+            }
+
+            /*
+              Keep 110-col / 5px Cascadia glyphs readable on phones.
+              Horizontal scroll lives ONLY inside .kuru-dynasty-art;
+              min-width:0 chain above stops pre min-content from widening the page.
+              No zoom / cqw / transform scale (those smear ░▒▓█ into a solid block).
+            */
+            .header-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .kuru-dynasty-scale {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin: 0.5rem 0 0;
+                overflow: hidden; /* contain pre intrinsic width */
+            }
+
             .kuru-dynasty-art {
-                margin: 0.5rem auto;
+                position: relative;
+                /* width:0 + min-width:100%: take parent width, never grow from pre */
+                width: 0;
+                min-width: 100%;
+                max-width: 100%;
+                margin: 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                display: block;
+                transform: none;
             }
-            
+
             .kuru-dynasty-art pre {
+                position: relative;
+                display: block;
                 font-size: 5px;
+                line-height: 1;
+                width: max-content;
+                max-width: none;
+                margin: 0;
+                white-space: pre;
+                overflow: visible;
+                transform: none;
+                zoom: unset;
+                font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
+                user-select: text;
+                -webkit-user-select: text;
+                -webkit-text-size-adjust: none;
+                text-size-adjust: none;
             }
-            
-            /* Fix marquee for mobile */
+
+            .project-tech,
+            .project-desc,
+            .exp-sub,
+            .exp-role,
+            .item,
+            .tagline {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            .exp-header {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            .link-kind {
+                white-space: normal;
+            }
+
+            /* Keep status marquee inside a clipped box; never expand the page */
+            .marquee {
+                overflow: hidden;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+            }
+
             .marquee-content {
+                display: inline-block;
+                max-width: none;
+                /* 100% of .marquee width → start just off the right edge */
+                padding-left: 100%;
+                box-sizing: content-box;
                 animation-duration: 30s;
+                will-change: transform;
             }
-            
+
             @keyframes marquee {
-                0% { transform: translate3d(25vw, 0, 0); }
+                0% { transform: translate3d(0, 0, 0); }
                 100% { transform: translate3d(-100%, 0, 0); }
             }
         }
@@ -564,7 +686,8 @@
                             "building scalable systems and solving problems, one algorithm at a time"
                         </div>
                     </div>
-                    <a class="kuru-dynasty-link" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer" title="Try the ASCII art tool">
+                    <div class="kuru-dynasty-badge">
+                    <div class="kuru-dynasty-scale">
                     <div class="kuru-dynasty-art">
                         <pre aria-label="Kuru dynasty symbol"><span class="kb">░░░░░░▒░░░░░░░░░░░░░░</span> <span class="kb">░▒▒░░░░░░░▒░░░░▒░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░▒░░░░░▒░▒</span> <span class="kb">░░░░░░░░░░</span>
 <span class="kb">░░</span> <span class="kb">░▒░░</span> <span class="kb">░░▒░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░▒▒▒░░░░▒░</span> <span class="kb">░▒░░░░░░░░▒░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░</span> <span class="kb">░</span>
@@ -609,8 +732,9 @@
 <span class="kb">░░▒▒░░░░░</span>  <span class="kb">░░░</span> <span class="kb">░░░░░▒░░░▒</span> <span class="kb">▒</span> <span class="kb">░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░░░░░▒░░</span>  <span class="kb">░░░░░░░░░</span> <span class="kb">░░▒░░░░░░░▒</span> <span class="kb">░▒░░░░░░░░░</span> <span class="kb">░</span>
 <span class="kb">░</span> <span class="kb">░░░</span> <span class="kb">░░</span> <span class="kb">░</span> <span class="kb">░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░▒</span> <span class="kb">░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░</span></pre>
                     </div>
-                    <span class="kuru-dynasty-caption">$ blockart</span>
-                    </a>
+                    </div>
+                    <a class="kuru-dynasty-caption" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer" title="Try the ASCII art tool">$ blockart</a>
+                    </div>
                 </div>
                 <div class="marquee">
                     <div class="marquee-content">
@@ -804,6 +928,7 @@
         }
         
         // Initialize theme on page load
+        
         document.addEventListener('DOMContentLoaded', initializeTheme);
         
         // Listen for system theme changes
