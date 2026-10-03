@@ -10,6 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/cascadia-code" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: "Cascadia Code";
+            src: url("kuru-blocks.woff2") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: block;
+            unicode-range: U+0020, U+2588, U+2591-2593;
+        }
+    </style>
+    <style>
         :root {
             --bg: #FFFDF0;
             --bg-secondary: #F8F6E8;
@@ -177,37 +187,34 @@
             margin-bottom: 0.3rem;
         }
         
-        .kuru-dynasty-link {
-            display: inline-block;
+        .kuru-dynasty {
+            display: block;
             max-width: 100%;
-            text-decoration: none;
-            color: inherit;
-            outline: none;
-        }
-
-        .kuru-dynasty-link::after {
-            content: none;
-        }
-
-        .kuru-dynasty-link:hover .kuru-dynasty-art,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-art {
-            filter: brightness(1.08);
+            min-width: 0;
         }
 
         .kuru-dynasty-caption {
             display: block;
+            width: fit-content;
+            margin-left: auto;
             margin-top: 0.25rem;
             font-size: 0.7rem;
-            color: var(--gray);
+            color: var(--blue);
             letter-spacing: 0.02em;
             text-align: right;
+            text-decoration: none;
             opacity: 0;
             transition: opacity 0.2s ease;
-            pointer-events: none;
         }
 
-        .kuru-dynasty-link:hover .kuru-dynasty-caption,
-        .kuru-dynasty-link:focus-visible .kuru-dynasty-caption {
+        .kuru-dynasty-caption::after {
+            content: " \2197";
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+
+        .kuru-dynasty:hover .kuru-dynasty-caption,
+        .kuru-dynasty-caption:focus-visible {
             opacity: 1;
         }
 
@@ -233,7 +240,7 @@
         .kuru-dynasty-art pre {
             display: block;
             text-align: left;
-            font-family: 'Cascadia Code', 'Consolas', 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-family: "Cascadia Code", ui-monospace, monospace;
             font-size: 5px;
             line-height: 1;
             letter-spacing: 0;
@@ -241,7 +248,12 @@
             white-space: pre;
             overflow: hidden;
             max-width: 100%;
+            font-synthesis: none;
+            user-select: text;
+            -webkit-user-select: text;
+            cursor: text;
             -webkit-text-size-adjust: none;
+            -moz-text-size-adjust: none;
             text-size-adjust: none;
         }
         
@@ -512,28 +524,54 @@
                 grid-template-columns: 1fr;
             }
             
+            html, body {
+                overflow-x: clip;
+            }
+
+            .terminal, .terminal-body, .header, .header-layout, .name-section {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            .name-section {
+                overflow-wrap: anywhere;
+            }
+
             .header-layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr);
                 gap: 1rem;
             }
-            
+
+            .kuru-dynasty {
+                width: 100%;
+                container-type: inline-size;
+            }
+
+            /* Size the 110-column row to the column, then let the red card
+               shrink-wrap the glyphs so no empty bar sits beside the art. */
             .kuru-dynasty-art {
-                margin: 0.5rem auto;
+                width: fit-content;
+                max-width: 100%;
+                margin: 0.5rem 0 0;
             }
-            
+
             .kuru-dynasty-art pre {
-                font-size: 5px;
+                font-size: calc((100cqi - 2px) / 64.453125);
+                line-height: 1;
+                width: max-content;
+                max-width: none;
             }
-            
-            /* Fix marquee for mobile */
+
             .marquee-content {
+                padding-left: 100%;
                 animation-duration: 30s;
             }
-            
+
             @keyframes marquee {
-                0% { transform: translate3d(25vw, 0, 0); }
+                0% { transform: translate3d(0, 0, 0); }
                 100% { transform: translate3d(-100%, 0, 0); }
             }
+
         }
     </style>
 </head>
@@ -564,7 +602,7 @@
                             "building scalable systems and solving problems, one algorithm at a time"
                         </div>
                     </div>
-                    <a class="kuru-dynasty-link" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer" title="Try the ASCII art tool">
+                    <div class="kuru-dynasty">
                     <div class="kuru-dynasty-art">
                         <pre aria-label="Kuru dynasty symbol"><span class="kb">░░░░░░▒░░░░░░░░░░░░░░</span> <span class="kb">░▒▒░░░░░░░▒░░░░▒░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░▒░░░░░▒░▒</span> <span class="kb">░░░░░░░░░░</span>
 <span class="kb">░░</span> <span class="kb">░▒░░</span> <span class="kb">░░▒░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░</span> <span class="kb">░░░</span> <span class="kb">░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░▒▒▒░░░░▒░</span> <span class="kb">░▒░░░░░░░░▒░░░</span> <span class="kb">░░</span> <span class="kb">░░░░░</span> <span class="kb">░</span>
@@ -609,8 +647,8 @@
 <span class="kb">░░▒▒░░░░░</span>  <span class="kb">░░░</span> <span class="kb">░░░░░▒░░░▒</span> <span class="kb">▒</span> <span class="kb">░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░░░░░░░░░░░░</span> <span class="kb">░░░░░</span> <span class="kb">░░░░░░░░▒░░</span>  <span class="kb">░░░░░░░░░</span> <span class="kb">░░▒░░░░░░░▒</span> <span class="kb">░▒░░░░░░░░░</span> <span class="kb">░</span>
 <span class="kb">░</span> <span class="kb">░░░</span> <span class="kb">░░</span> <span class="kb">░</span> <span class="kb">░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░▒</span> <span class="kb">░░░░░░░░░░░░░</span> <span class="kb">░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░</span> <span class="kb">░░░░</span> <span class="kb">░░░</span></pre>
                     </div>
-                    <span class="kuru-dynasty-caption">$ blockart</span>
-                    </a>
+                    <a class="kuru-dynasty-caption" href="https://ascii.projects.xrudra.dev" target="_blank" rel="noopener noreferrer">$ blockart</a>
+                    </div>
                 </div>
                 <div class="marquee">
                     <div class="marquee-content">
