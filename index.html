@@ -414,6 +414,16 @@
             flex-wrap: wrap;
         }
         
+        .exp-tree {
+            color: var(--gray);
+            font-weight: 400;
+            margin-right: 0.25rem;
+        }
+        
+        .exp-co {
+            color: var(--text);
+        }
+        
         .exp-dates {
             color: var(--gray);
             font-size: 0.8rem;
@@ -421,15 +431,48 @@
         }
         
         .exp-role {
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin: 0.15rem 0 0.25rem;
+        }
+        
+        .exp-loc {
             color: var(--gray);
-            font-size: 0.8rem;
-            margin-bottom: 0.2rem;
+            font-weight: 400;
+        }
+        
+        .exp-stack {
+            color: var(--orange);
+            font-size: 0.78rem;
+            margin-bottom: 0.45rem;
+            line-height: 1.35;
         }
         
         .exp-sub {
+            display: grid;
+            grid-template-columns: 1.15em 1fr;
+            column-gap: 0.35rem;
             font-size: 0.82rem;
             color: var(--text);
-            margin: 0.15rem 0 0.15rem 0.4rem;
+            margin: 0.4rem 0 0.4rem 0.15rem;
+            line-height: 1.4;
+        }
+        
+        .exp-content {
+            min-width: 0;
+        }
+        
+        .exp-label {
+            color: var(--blue);
+            font-weight: 500;
+            font-size: 0.82rem;
+            margin-bottom: 0.12rem;
+        }
+        
+        .exp-body {
+            color: var(--text);
+            opacity: 0.92;
         }
         
         .status-bar {
@@ -679,42 +722,133 @@
                 <div class="output">
                     <div class="project-item">
                         <div class="project-title exp-header">
-                            <span>├─ Siemens Digital Industries Software</span>
+                            <span><span class="exp-tree">├─</span><span class="exp-co">Siemens Digital Industries Software</span></span>
                             <span class="exp-dates">Aug 2025 – Present</span>
                         </div>
-                        <div class="exp-role">Software Engineer · Pune</div>
-                        <div class="project-tech">React | Express | MongoDB | GitLab CI | Coverity | Ansible | Terraform | AWS AMI</div>
-                        <div class="project-desc">TCX Sandbox onboarding portal, Coverity/GitLab CI, SI/CVE work on TCX apps and RHEL UBI/AMIs, golden AMI pipeline with Teamcenter X tools</div>
+                        <div class="exp-role">Software Engineer <span class="exp-loc">· Pune</span></div>
+                        <div class="exp-stack">GitLab CI | Terraform | Ansible | AWS | xterm.js | WSS | React | Express | MongoDB | Polarion | Coverity</div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Demo Centre AMI</div>
+                                <div class="exp-body">Pipeline that builds a single Windows <span class="highlight">EC2</span> packing the TCX SaaS stack (Deployment Center, kits, JDK, Tomcat, PostgreSQL, license server) so sales can demo without a full multi-cell cloud install. Throwaway AWS infra, <span class="highlight">SSM</span> for the multi-hour Windows install, sysprep, <span class="highlight">KMS</span>-encrypted AMI out</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Sandbox portal</div>
+                                <div class="exp-body">Request/manage TCX test environments: own-env vs admin views, GitLab-style search/filter, config import, one-time scheduled deploys, <span class="highlight">SAM 2.0</span> in the Ansible payload, JWT/admin API guards, Coverity jobs in CI</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">xterm.js remote shell</div>
+                                <div class="exp-body">In-browser terminal over <span class="highlight">WSS</span> (TLS WebSocket, not plaintext ws) to an SSH or Azure session on the env. Connection lifecycle (open/message/close/fail), attach on Ready and Failed, command autocomplete, and a text editor inside the terminal</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">└─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">SI triage + image patching</div>
+                                <div class="exp-body">Polarion automation for Teamcenter and Teamcenter X: pull work items, gather NVD / CVE.org / Red Hat errata + SBOM hits on <span class="highlight">RHEL UBI</span> base images and TC AMIs, rank CVSS, dry-run vs post a comment, then patch and rebuild the affected images</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-item">
                         <div class="project-title exp-header">
-                            <span>├─ Pratiti Technologies</span>
+                            <span><span class="exp-tree">├─</span><span class="exp-co">Pratiti Technologies</span></span>
                             <span class="exp-dates">Jul 2025 – Aug 2025</span>
                         </div>
-                        <div class="exp-role">DevOps Intern · Pune</div>
-                        <div class="project-tech">Terraform | Ansible | AWS | CI/CD</div>
-                        <div class="project-desc">IaC for AWS networking/compute/IAM, Ansible host setup, and CI so infra and config changes applied the same way everywhere</div>
+                        <div class="exp-role">DevOps Intern <span class="exp-loc">· Pune</span></div>
+                        <div class="exp-stack">Terraform | Ansible | AWS | GitLab CI</div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Terraform modules</div>
+                                <div class="exp-body">VPC, subnets, security groups, EC2, and IAM, with a remote state backend and per-env tfvars — a new AWS environment was <span class="highlight">plan/apply</span>, not a console checklist</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">└─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Ansible + GitLab CI</div>
+                                <div class="exp-body">Roles that baked packages, services, and config onto Linux hosts; CI ran Terraform then Ansible so a merged change actually stood up a consistent box</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-item">
                         <div class="project-title exp-header">
-                            <span>├─ Unizoy</span>
+                            <span><span class="exp-tree">├─</span><span class="exp-co">Unizoy</span></span>
                             <span class="exp-dates">Apr 2025 – Jul 2025</span>
                         </div>
-                        <div class="exp-role">Backend Developer Intern · Remote</div>
-                        <div class="project-tech">NestJS | TypeScript | PostgreSQL | TypeORM | BullMQ | S3 | JWT</div>
-                        <div class="project-desc">iDelta Books trading back-office: NSE/BSE/MCX CSV ingest, dual-UCC P&amp;L, async CSV/Excel exports to S3, cost-log/KYC on a hexagonal NestJS core</div>
+                        <div class="exp-role">Backend Developer Intern <span class="exp-loc">· Remote</span></div>
+                        <div class="exp-stack">NestJS | TypeORM | PostgreSQL | BullMQ | S3 | JWT | TOTP</div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">iDelta Books API</div>
+                                <div class="exp-body">Daily NSE/BSE/MCX broker CSVs ingested via BullMQ, then composed into P&amp;L (gross − expenses − peak interest − 12/13% dynamic interest), margin, and ledgers per Unique Client Code and family</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Async export layer</div>
+                                <div class="exp-body">BullMQ + Strategy: any report implements <span class="highlight">ExportableService</span>, streams CSV/Excel to S3 with signed URLs, retries, and TTL cleanup — wired into <span class="highlight">10+ modules</span> (P&amp;L, margin, interest, ledgers, admin home)</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Dual UCC + dashboards</div>
+                                <div class="exp-body">Equity vs MCX client codes through reports and dashboards; replaced N+1 homepage queries with window-function SQL so admin graphs matched the report modules</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">└─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Cost-log / KYC</div>
+                                <div class="exp-body">JSONB prefs, TypeORM migrations, auto-create cost log on approve, PATCH pricing with audit history, 5-role RBAC on JWT + TOTP 2FA</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-item">
                         <div class="project-title exp-header">
-                            <span>└─ Freelance</span>
-                            <span class="exp-dates">2024 – 2025</span>
+                            <span><span class="exp-tree">└─</span><span class="exp-co">Freelance</span></span>
+                            <span class="exp-dates">2024 – 2026</span>
                         </div>
-                        <div class="exp-role">Software Developer · Remote</div>
-                        <div class="project-tech">C++17 | Boost.Asio | WebSockets | React | GitHub Actions | AWS CI/CD | Docker</div>
-                        <div class="exp-sub">├─ Deribit Testnet execution client — REST + TLS WebSocket order APIs</div>
-                        <div class="exp-sub">├─ Live OKX L2 order-book ingest for a crypto trade simulator</div>
-                        <div class="exp-sub">├─ MahaCPD — frontend and tests for Maharashtra doctors' yearly CPD/seminar points</div>
-                        <div class="exp-sub">└─ Stealth dApp/DAO platform — GitHub Actions, AWS CI/CD, Docker images</div>
+                        <div class="exp-role">Software Developer <span class="exp-loc">· Remote</span></div>
+                        <div class="exp-stack">C++17 | Boost.Asio | WebSockets | GitHub Actions | AWS | Docker</div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Deribit testnet client</div>
+                                <div class="exp-body">C++ client: place, cancel, and edit orders, pull the book and positions, listen for live book updates</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">L2 market-data feed</div>
+                                <div class="exp-body">C++ program that stays connected to a live crypto feed and parses bid/ask updates for a trade simulator</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">├─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">MahaCPD</div>
+                                <div class="exp-body">Frontend and tests for a site where Maharashtra doctors log seminars to collect yearly points for their license</div>
+                            </div>
+                        </div>
+                        <div class="exp-sub">
+                            <span class="exp-tree">└─</span>
+                            <div class="exp-content">
+                                <div class="exp-label">Stealth dApp / DAO</div>
+                                <div class="exp-body">GitHub/AWS pipelines that build and deploy their apps, and Docker so local and cloud run the same image</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
