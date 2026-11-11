@@ -1,0 +1,40 @@
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Siemens Digital Industries Software}{Aug. 2025 -- Present}
+      {Software Engineer}{Pune, MH}
+      \resumeItemListStart
+        \resumeItem{Automated \textbf{security issue triage} for core Teamcenter and Teamcenter X images: a Python tool pulls SI tickets from Polarion, checks each CVE against NVD, CVE.org, Red Hat, and the \textbf{internal SBOMs in SCPone} (Teamcenter server and UBI .NET components), ranks CVSS evidence, and drafts the review comment, with dry-run by default and CSV audit logs.}
+        \resumeItem{Drove \textbf{security mitigation} on the \textbf{RHEL UBI base images and Teamcenter images/AMIs}: updated vulnerable packages and libraries, rebuilt and re-verified the images against the SBOM, and closed the findings in Polarion.}
+        \resumeItem{Automated the build of a ready-to-use \textbf{Teamcenter X demo machine image}: a GitLab CI pipeline (Terraform, Ansible) creates temporary AWS infrastructure, installs the full stack over SSM, saves a KMS-encrypted AMI, and tears it down; multi-hour builds \textbf{resume from the failed step}.}
+        \resumeItem{Built core features of the portal engineers use to \textbf{request and manage Teamcenter X cloud environments} (React, Express, MongoDB): dashboards, search, quotas, scheduled deploys, retries.}
+        \resumeItem{Secured it with \textbf{JWT and role-based admin access}, webhook token checks, and WSS for the in-browser xterm.js SSH/Azure terminal; added Coverity to GitLab CI and fixed its defects.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Pratiti Technologies}{July 2025 -- Aug. 2025}
+      {DevOps Intern}{Pune, MH}
+      \resumeItemListStart
+        \resumeItem{Wrote reusable Terraform modules (VPC, EC2, IAM) and Ansible roles, run from a single GitLab CI pipeline for repeatable AWS environments.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Unizoy}{Apr. 2025 -- July 2025}
+      {Backend Developer Intern}{Remote}
+      \resumeItemListStart
+        \resumeItem{Core backend contributor (\textbf{140+ commits}) on iDelta Books, a NestJS and PostgreSQL back-office for a trading firm that turns daily NSE, BSE, and MCX broker files into P\&L, margin, interest, and ledger reports.}
+        \resumeItem{Designed a shared \textbf{background export system} (BullMQ, Redis, S3) that lets \textbf{10+ reports} generate CSV or Excel files without blocking the API, delivered through expiring download links.}
+        \resumeItem{Built P\&L and admin dashboard APIs with access control for 5 user roles, and replaced per-row query loops with bulk SQL so dashboard totals match the reports.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Freelance}{2024 -- Present}
+      {Software Developer}{Remote}
+      \resumeItemListStart
+        \resumeItem{\textbf{MahaCPD:} built the frontend and tests for a platform where Maharashtra doctors log seminar hours toward yearly license-renewal credits.}
+        \resumeItem{\textbf{Web3 startup (stealth):} set up CI/CD with GitHub Actions, Docker, and AWS so local and cloud builds behave the same.}
+        \resumeItem{\textbf{GoQuant:} built C++ clients for crypto exchange APIs (Deribit, OKX) that place and cancel orders and stream live order books.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd

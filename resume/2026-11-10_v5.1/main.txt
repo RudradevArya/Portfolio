@@ -1,0 +1,15 @@
+% Resume entry point. Same layout as v4_Anon: numbered chunks beside this file.
+%   tectonic main.txt
+%   pdflatex main.txt
+\input{1commands}
+
+\begin{document}
+
+\input{2header}
+\input{3education}
+\input{4experience}
+\input{5projects}
+\input{6skills}
+\input{7certifications}
+
+\end{document}
