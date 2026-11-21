@@ -1,0 +1,39 @@
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Siemens Digital Industries Software}{Aug. 2025 -- Present}
+      {Software Engineer}{Pune, MH}
+      \resumeItemListStart
+        \resumeItem{Automated \textbf{security issue triage} for core Teamcenter and Teamcenter X images: a Python pipeline pulls SI tickets from Polarion, correlates each CVE across NVD, Red Hat, and the \textbf{internal SBOMs in SCPone}, ranks CVSS evidence, and drafts the review, \textbf{dry-run by default} with confirmation before posting.}
+        \resumeItem{Drove \textbf{security mitigation} on the \textbf{RHEL UBI base images and Teamcenter images/AMIs}: updated vulnerable packages and libraries, rebuilt and re-verified the images against the SBOM, and closed the findings in Polarion.}
+        \resumeItem{Designed a \textbf{checkpointed, resumable} GitLab CI pipeline (Terraform, Ansible) that builds a single-EC2 \textbf{Teamcenter X demo AMI} on \textbf{ephemeral, tenant-isolated} AWS infra: Vault/STS short-lived credentials, install over SSM, KMS-encrypted AMI; versions are \textbf{config-driven}.}
+        \resumeItem{Built the portal engineers use to \textbf{request and manage Teamcenter X environments} (React, Express, MongoDB), secured with \textbf{JWT and role-based middleware}, webhook token auth, and WSS for the xterm.js SSH/Azure terminal; added Coverity (SAST) to CI.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Pratiti Technologies}{July 2025 -- Aug. 2025}
+      {DevOps Intern}{Pune, MH}
+      \resumeItemListStart
+        \resumeItem{Reusable \textbf{Infrastructure-as-Code}: Terraform modules (VPC, EC2, IAM) with remote state, plus Ansible roles, run from one GitLab CI pipeline.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Unizoy}{Apr. 2025 -- July 2025}
+      {Backend Developer Intern}{Remote}
+      \resumeItemListStart
+        \resumeItem{Core backend contributor (\textbf{140+ commits}) on iDelta Books, a \textbf{hexagonal (ports and adapters) NestJS} and PostgreSQL back-office for a trading firm that turns daily NSE, BSE, and MCX broker files into P\&L, margin, interest, and ledger reports.}
+        \resumeItem{Designed an \textbf{async export pipeline} (BullMQ, Redis, S3) using the \textbf{Strategy pattern} behind a shared \texttt{ExportableService} port, so \textbf{10+ report modules} produce CSV or Excel off the request path, with retries, signed URLs, and TTL cleanup.}
+        \resumeItem{Built P\&L and dashboard APIs with \textbf{5-role RBAC}; replaced N+1 query loops with \textbf{window-function SQL}.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Freelance}{2024 -- Present}
+      {Software Developer}{Remote}
+      \resumeItemListStart
+        \resumeItem{\textbf{GoQuant:} C++17 Deribit and OKX clients: \textbf{async, event-driven} TLS WebSocket L2 order-book ingest (Boost.Asio) on its own I/O thread, plus REST order APIs.}
+        \resumeItem{\textbf{MahaCPD:} built the frontend and tests for a platform where Maharashtra doctors log seminar hours toward yearly license-renewal credits.}
+        \resumeItem{\textbf{Web3 startup (stealth):} \textbf{containerized} the apps; CI/CD with GitHub Actions and AWS.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
