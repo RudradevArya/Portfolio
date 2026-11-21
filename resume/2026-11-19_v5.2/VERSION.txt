@@ -1,0 +1,1 @@
+v5.2 — 2026-11-19. From v5.1. Experience and projects reworded to name the architecture and design choices from the source notes (hexagonal NestJS, Strategy-pattern export port, checkpointed and ephemeral AMI pipeline, dry-run SI triage, async C++ I/O). Skills gained Hexagonal / ports and adapters. Layout, header, education, and certifications unchanged.
